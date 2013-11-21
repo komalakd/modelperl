@@ -1,0 +1,31 @@
+<h2>Alta de <span>Funciones</span></h2>
+<p>Ingrese los datos para registrar una nueva funci&oacute;n:</p>
+
+<form id="formAlta" action="funciones.cgi" method="post">
+    <input type="hidden" name="accion" value="acepta_alta" />
+    <div>
+        <label for="nombre">Nombre:</label> <input type="text" id="nombre" name="nombre"><br>
+    </div>
+    <div>
+        <label for="descripcion">Descripcí&oacute;n:</label> <input type="text" id="descripcion" name="descripcion"><br>
+    </div>
+    <div>
+        <label for="ultima_fecha">&Uacute;ltima fecha:</label> <input type="text" id="ultima_fecha" name="ultima_fecha"><br>
+    </div>
+    <div>
+        <label for="descuento">Porcentaje Descuento:</label> <input type="text" id="descuento" name="descuento"><br>
+    </div>
+
+    <input type="submit" id="registrar" name="registrar" value="Registrar Funci&oacute;n">
+
+</form>
+
+<p id="btnForm" class="button-style">
+    <a href="">Registrar funci&oacute;n</a>
+</p>
+
+<script type="text/javascript">
+$('#btnForm').click(function() {
+  $('#formAlta').submit();
+});
+</script>

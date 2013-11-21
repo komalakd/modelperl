@@ -1,0 +1,106 @@
+<h2>Registrar nueva <span>Reserva</span></h2>
+<!-- <p>Por favor, ingrese los datos de la reserva</p> -->
+
+<form action="reservas.cgi" method="post">
+
+    <input type="hidden" name="accion" value="confirma_alta" />
+    <input type="hidden" name="id_sala" value="<!-- TMPL_VAR ID_SALA -->" />
+    <input type="hidden" name="desde" value="<!-- TMPL_VAR DESDE -->" />
+    <input type="hidden" name="hasta" value="<!-- TMPL_VAR HASTA -->" />
+    <input type="hidden" name="tipo_ensayo" value="<!-- TMPL_VAR TIPO_ENSAYO -->" />
+
+
+
+    <!-- TMPL_IF VARIOS_MUSICOS -->
+    <h4>Existen m&uacute;sicos con que coinciden con los ingresados, por favor seleccione uno de ellos o elija la opci&oacute;n "Mantener datos ingresados"</h4>
+
+    <table cellpadding="0" cellspacing="0" border="1" class="display" width="80%"> 
+    
+        <thead> 
+            <tr>
+                <th width=30%>Nombre</th>
+                <th width=30%>Apellido</th>
+                <th width=10%>Tel&eacute;fono Fijo</th>
+                <th width=10%>Tel&eacute;fono Fijo</th>
+                <th width=10%>Seleccionar</th>
+            </tr>
+        </thead> 
+
+        <tbody> 
+            
+            <tr>
+                <td COLSPAN="4">Mantener Datos Ingresados</td>
+                <td>
+                    <input type="checkbox" name="check_musicos" value="0">
+                </td>
+            </tr>
+
+            <!-- TMPL_LOOP MUSICOS -->
+            <tr>
+                <td><!-- TMPL_VAR NOMBRE --></td>
+                <td><!-- TMPL_VAR APELLIDO --></td>
+                <td><!-- TMPL_VAR FIJO --></td>
+                <td><!-- TMPL_VAR CELULAR --></td>
+                <td>
+                    <input type="checkbox" name="check_musicos" value="<!-- TMPL_VAR ID_MUSICO -->">
+                </td>
+            </tr>
+            <!-- /TMPL_LOOP MUSICOS -->
+        </tbody>
+    </table>
+
+    <!-- TMPL_ELSE VARIOS_MUSICOS -->
+
+    <h4>Se ha registrado <!-- TMPL_VAR NOM_Y_AP --> como un nuevo m&uacute;sico.</h4>
+
+    <!-- /TMPL_IF VARIOS_MUSICOS -->
+
+
+
+
+    <!-- TMPL_IF VARIAS_BANDAS -->
+    
+     <h4>Existen bandas que coinciden con los datos ingresados, por favor seleccione una de ellas o elija la opci&oacute;n "Mantener datos ingresados"</h4>
+
+    <table cellpadding="0" cellspacing="0" border="1" class="display" width="80%"> 
+    
+        <thead> 
+            <tr>
+                <th width=30%>Nombre</th>
+                <th width=10%>Seleccionar</th>
+            </tr>
+        </thead> 
+
+        <tbody> 
+            
+            <tr>
+                <td COLSPAN="4">Mantener Datos Ingresados</td>
+                <td>
+                    <input type="checkbox" name="check_musicos" value="0">
+                </td>
+            </tr>
+
+            <!-- TMPL_LOOP BANDAS -->
+            <tr>
+                <td><!-- TMPL_VAR NOMBRE --></td>
+                <td>
+                    <input type="checkbox" name="check_musicos" value="<!-- TMPL_VAR ID_MUSICO -->">
+                </td>
+            </tr>
+            <!-- /TMPL_LOOP BANDAS -->
+        </tbody>
+    </table>
+
+    <!-- TMPL_ELSE VARIAS_BANDAS -->
+
+    <h4>Se ha registrado <!-- TMPL_VAR BANDA --> como nueva banda.</h4>
+
+    <!-- /TMPL_IF VARIAS_BANDAS -->
+
+
+
+    <input type="submit" id="registrar" name="registrar" value="Registrar Reserva">
+
+</form>
+
+<p onclick="" class="button-style"><a href="">Registrar Reserva</a></p>

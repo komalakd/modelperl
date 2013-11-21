@@ -1,0 +1,32 @@
+<div style="width: 322px; min-height: 270px; margin: 0 25px; font-size: 12px;">
+    <h1>Descargar</h1>
+    <p>
+        
+            Como usuario registrado, no se le presenta ningún captcha.
+            <br /><a href="/es/accounts/register/">Regístrese ahora</a>
+        
+    </p>
+    <form action="/es/photos/download/computer-31191.png" method="post" class="ajax_form" data-target="#cboxLoadedContent">
+        <p> <input style="display:none;" type="text" name="honeypot" id="id_honeypot" /></p>
+<p> 
+<style>#recaptcha_image img{width:298px;height:58px;}</style>
+<div id="fdiv_recaptcha" style="display:none;">
+    <label class="recaptcha_only_if_image"><b>Security check: Enter the 2 words below</b></label>
+    <div class="rounded" style="width: 298px; height: 58px; background: #fff; overflow: hidden; margin: 5px 0; border: 1px solid #ddd; padding: 1px 5px;">
+        <div id="recaptcha_image"></div>
+    </div>
+    <input type="text" id="recaptcha_response_field" name="recaptcha_response_field" style="width: 300px;" />
+    <div style="font-size: 12px;"><a href="javascript:Recaptcha.reload()">New words, please!</a> &nbsp; © reCAPTCHA</div>
+</div>
+<script>
+    function callback(){Recaptcha.create("6Ld8hL8SAAAAAKbydL06Ir20hG_u2SfRkBbfpTNf", "fdiv_recaptcha", { theme:'custom', custom_theme_widget:'fdiv_recaptcha', lang:'es' });}
+    var s=document.createElement('script');s.src='http://www.google.com/recaptcha/api/js/recaptcha_ajax.js';
+    if(s.addEventListener){s.addEventListener("load",callback,false);}else {s.onreadystatechange=callback;}
+    document.body.appendChild(s);
+</script>
+<input type="hidden" name="timestamp" value="1353418268" id="id_timestamp" /><input type="hidden" name="security_hash" value="fac091122a17688ac8638e17172ede8b451b2fca" id="id_security_hash" /></p>
+        <div><input class="button green" type="submit" value="Descargar" /></div>
+    </form>
+</div>
+<br />
+<script>setTimeout(function(){$.colorbox.resize();}, 200);</script>

@@ -1,0 +1,76 @@
+<h2>Registrar nueva <span>Reserva</span></h2>
+<p>Por favor, ingrese los datos de la reserva</p>
+
+<form action="reservas.cgi" method="post">
+    <input type="hidden" name="accion" value="acepta_alta" />
+    
+    <h4>Datos del ensayo</h4>
+    <div>
+        <label for="sala">Sala:</label> 
+
+        <select>
+            <!-- TMPL_LOOP SALAS -->
+            <option name="sala" value="<!-- TMPL_VAR ID_SALA -->"><!-- TMPL_VAR NOMBRE_SALA --></option>
+            <!-- /TMPL_LOOP SALAS -->
+        </select>
+    </div>
+
+    <div>
+        <label for="desde">Desde:</label> 
+        <input type="text" id="desde" name="desde" value=""><br>
+    </div>
+    <div>
+        <label for="hasta">Hasta:</label> 
+        <input type="text" id="hasta" name="hasta" value=""><br>
+    </div>
+    <div>
+        <label for="hasta">Reserva fija:</label> <input type="checkbox" name="check_fijo" value="">
+    </div>
+
+    <h4>Datos del M&uacute;sico</h4>
+    <div>
+    	<label for="nombre">Nombre:</label> <input type="text" id="nombre" name="nombre" value=""><br><br>
+        <label for="apellido">Apellido:</label> <input type="text" id="apellido" name="apellido" value=""><br><br>
+        <label for="fijo">Tel&eacute;fono fijo:</label> <input type="text" id="fijo" name="fijo" value=""><br>
+        <label for="celular">Tel&eacute;fono celular:</label> <input type="text" id="celular" name="celular" value=""><br>
+    </div>
+
+    <h4>Datos de la Banda</h4>
+    <div>
+        <label for="banda">Banda:</label> <input type="text" id="banda" name="banda" value=""><br><br>
+    </div>
+
+    <h4>Alquiler de accesorios</h4>
+
+    <table cellpadding="0" cellspacing="0" border="1" class="display" width="80%"> 
+    
+        <thead> 
+            <tr>
+                <th width=30%>Descripci&oacute;n</th>
+                <th width=30%>Detalle</th>
+                <th width=10%>Precio</th>
+                <th width=10%>Alquilado</th>
+            </tr>
+        </thead> 
+
+        <tbody> 
+            <!-- TMPL_LOOP ACCESORIOS -->
+            <tr>
+                <td><!-- TMPL_VAR NOMBRE --></td>
+                <td><!-- TMPL_VAR DESCRIPCION --></td>
+                <td>$<!-- TMPL_VAR PRECIO --></td>
+                <td>
+                    <input type="checkbox" name="check_alquilado" value="<!-- TMPL_VAR ID_ACCESORIO -->">
+                </td>
+            </tr>
+            <!-- /TMPL_LOOP ACCESORIOS -->
+        </tbody>
+    </table>
+
+
+
+    <input type="submit" id="registrar" name="registrar" value="Registrar Reserva">
+
+</form>
+
+<p onclick="" class="button-style"><a href="">Registrar Reserva</a></p>

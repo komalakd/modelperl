@@ -1,0 +1,24 @@
+<h2>Modificar datos de <span>Funci&oacute;n</span></h2>
+<p>Ingrese los datos para modificar los datos de la funci&oacute;n:</p>
+
+<form action="funciones.cgi" method="post">
+    <input type="hidden" name="accion" value="acepta_modificacion" />
+    <input type="hidden" name="id_funcion" value="<!-- TMPL_VAR ID_FUNCION -->" />
+    <div>
+    	<label for="nombre">Nombre:</label> <input type="text" id="nombre" name="nombre" value="<!-- TMPL_VAR NOMBRE -->"><br>
+    </div>
+    <div>
+    	<label for="descripcion">Descripci&oacute;n:</label> <input type="text" id="descripcion" name="descripcion" value="<!-- TMPL_VAR DESCRIPCION -->"><br>
+    </div>
+    <div>
+    	<label for="ultima_fecha">&Uacute;ltima fecha:</label> <input type="text" id="ultima_fecha" name="ultima_fecha" value="<!-- TMPL_VAR UFECHA -->"><br>
+    </div>
+    <div>
+    	<label for="descuento">Porcentaje Descuento:</label> <input type="text" id="descuento" name="descuento" value="<!-- TMPL_VAR DESCUENTO -->"><br>
+    </div>
+
+    <input type="submit" id="registrar" name="registrar" value="Modificar datos">
+
+</form>
+
+<p onclick="" class="button-style"><a href="">Modificar datos</a></p>

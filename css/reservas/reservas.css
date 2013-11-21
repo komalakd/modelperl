@@ -1,0 +1,20 @@
+* {
+	margin: 0,
+	padding: 0
+}
+
+.reserva{
+	margin-top: -11px
+}
+
+.fijo{
+	background-color: powderblue
+}
+
+.noFijo{
+	background-color: purple
+}
+
+#reservas tr{
+	height: 25px; /* modificar junto con .reserva->{margin-top} */
+} 

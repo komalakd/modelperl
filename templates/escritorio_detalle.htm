@@ -1,0 +1,77 @@
+<h2>Detalle de <span>Descuentos</span> de <span><!-- TMPL_VAR nombre_amigo --></span></h2>
+<!-- <p>A continuación se encuentra el historial de descuentos del amigo <!-- TMPL_VAR nombre_amigo -->:</p> -->
+
+<!-- <ul>
+    <li>Descuento 1:</li>
+    <li>Descuento 2:</li>
+    <li>Descuento 3:</li>
+    <li>Descuento 4:</li>
+</ul> -->
+
+<p>Para asignarle un descuento al amigo, por favor seleccione la función a la que desea aplicarle el descuento:</p>
+
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%"> 
+    
+    <thead> 
+        <tr>
+            <!-- <th>ID_AMIGO</th> -->
+            <th>Nombre</th>
+            <th>Descripci&oacute;n</th>
+            <th>&Uacute;ltima fecha</th>
+            <th>Descuento</th>
+            <th>Pedido</th>
+
+        </tr>
+    </thead> 
+
+    <tbody> 
+        <!-- TMPL_LOOP ROWS -->
+        <tr>
+            <!-- <!-- TMPL_VAR id_funcion --> -->
+            <td><!-- TMPL_VAR nombre --></td>
+            <td><!-- TMPL_VAR descripcion --></td>
+            <td><!-- TMPL_VAR ultima_fecha --></td>
+            <td><!-- TMPL_VAR descuento -->%</td>
+            <td>
+                
+                    <!-- TMPL_VAR fecha_pedido -->
+                
+            </td>
+
+            
+        </tr>
+        <!-- /TMPL_LOOP -->
+    </tbody> 
+</table>
+
+<!-- <form id="formAlta" action="escritorio.cgi" method="post">
+    <input type="hidden" name="accion" value="acepta_alta" />
+    <div>
+    	<label for="user">DNI:</label> <input type="text" id="dni" name="dni"><br>
+    </div>
+    <div>
+    	<label for="user">Nombre:</label> <input type="text" id="nombre" name="nombre"><br>
+    </div>
+    <div>
+    	<label for="user">Apellido:</label> <input type="text" id="apellido" name="apellido"><br>
+    </div>
+    <div>
+    	<label for="user">Telefono:</label> <input type="text" id="telefono" name="telefono"><br>
+    </div>
+    <div>
+    	<label for="mail">E-mail:</label> <input type="text" id="mail" name="mail"><br>
+    </div>
+
+    <input type="submit" id="registrar" name="registrar" value="Registrar Amigo">
+
+</form>
+
+<p id="btnForm" class="button-style">
+    <a href="">Registrar amigo</a>
+</p>
+
+<script type="text/javascript">
+$('#btnForm').click(function() {
+  $('#formAlta').submit();
+});
+</script> -->

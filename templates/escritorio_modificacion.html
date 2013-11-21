@@ -1,0 +1,27 @@
+<h2>Modificar datos de <span>Amigo</span></h2>
+<p>Ingrese los datos para modificar los datos del amigo:</p>
+
+<form action="amigos.cgi" method="post">
+    <input type="hidden" name="accion" value="acepta_modificacion" />
+    <input type="hidden" name="id_amigo" value="<!-- TMPL_VAR ID_amigo -->" />
+    <div>
+    	<label for="user">DNI:</label> <input type="text" id="dni" name="dni" value="<!-- TMPL_VAR DNI -->"><br>
+    </div>
+    <div>
+    	<label for="user">Nombre:</label> <input type="text" id="nombre" name="nombre" value="<!-- TMPL_VAR Nombre -->"><br>
+    </div>
+    <div>
+    	<label for="user">Apellido:</label> <input type="text" id="apellido" name="apellido" value="<!-- TMPL_VAR Apellido -->"><br>
+    </div>
+    <div>
+    	<label for="user">Telefono:</label> <input type="text" id="telefono" name="telefono" value="<!-- TMPL_VAR Telefono -->"><br>
+    </div>
+    <div>
+    	<label for="mail">E-mail:</label> <input type="text" id="mail" name="mail" value="<!-- TMPL_VAR Mail -->"><br>
+    </div>
+
+    <input type="submit" id="registrar" name="registrar" value="Registrar Amigo">
+
+</form>
+
+<p onclick="" class="button-style"><a href="">Modificar datos</a></p>

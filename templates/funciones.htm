@@ -1,0 +1,50 @@
+<h2><span>Listado de</span> Funciones</h2>
+<!-- <p>Listado de amigos registrados</p> -->
+<!-- <p class="button-style" style="float: right;"><a href="escritorio.cgi?accion=alta">Agregar nuevo Amigo</a></p>
+<br><br><br><br><br><br> -->
+
+<!-- <br> -->
+
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%"> 
+	
+	<thead> 
+		<tr>
+			<th>Nombre</th>
+			<th>Descripci&oacute;n</th>
+			<th>&Uacute;ltima fecha</th>
+			<th>Porcentaje Descuento</th>
+			<th>Descuentos Otorgados</th>
+			<th>Acci&oacute;n</th>
+
+		</tr>
+	</thead> 
+
+	<tbody> 
+		<!-- TMPL_LOOP ROWS -->
+		<tr>
+			
+			<td><!-- TMPL_VAR nombre --></td>
+			<td><!-- TMPL_VAR descripcion --></td> 
+			<td><!-- TMPL_VAR ultima_fecha --></td>
+			<td><!-- TMPL_VAR descuento -->%</td>
+			<td><!-- TMPL_VAR cant_descuentos --></td>
+			
+			<td>
+				<p>
+            		<a  href="funciones.cgi?accion=modificacion&id_funcion=<!-- TMPL_VAR id_funcion -->">
+            			<img src="images/editar.png"  height="25px" width="25px">
+            		</a>
+            		<a  href="funciones.cgi?accion=eliminar&id_funcion=<!-- TMPL_VAR id_funcion -->"
+            			onclick="javascript: return confirmar_eliminacion_funcion('<!-- TMPL_VAR nombre --> <!-- TMPL_VAR apellido -->');" >
+            			<img src="images/borrar.png"  height="25px" width="25px">
+            		</a>
+            		
+            	</p>
+			</td>
+
+		</tr>
+		<!-- /TMPL_LOOP -->
+	</tbody> 
+</table>
+<br><br>
+<p class="button-style"><a href="funciones.cgi?accion=alta">Agregar nueva Funci&oacute;n</a></p>

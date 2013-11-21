@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Salas Rosario</title>
+<link href='css/font1.css' rel='stylesheet' type='text/css' />
+<link href='css/font2.css' rel='stylesheet' type='text/css' />
+<link href="css/general/default.css" rel="stylesheet" type="text/css" media="all" />
+<!--[if IE 6]>
+<link href="default_ie6.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<!-- Begin DataTable scripts -->
+<script type="text/javascript" language="javascript" src="lib/javascript/jquery.js"></script> 
+<script type="text/javascript" language="javascript" src="lib/javascript/jquery.dataTables.js"></script> 
+<!-- TMPL_IF CSS --><!-- TMPL_VAR CSS --><!-- /TMPL_IF CSS -->
+<!-- TMPL_IF JS --><!-- TMPL_VAR JS --><!-- /TMPL_IF JS -->
+<style type="text/css" title="currentStyle"> 
+/* FIXME! Cargar solo en los listados!!! */
+	/*@import "css/general/demo_page.css";
+	@import "css/general/demo_table.css";*/
+</style> 
+
+<script type="text/javascript" charset="utf-8"> 
+	$(document).ready(function() {
+
+		$('#example').dataTable({
+			 "sPaginationType": "full_numbers"
+		});
+		var alerta = "<!-- TMPL_VAR ALERT -->";
+		if (alerta){
+			alert(alerta);
+		}
+		
+
+	});
+
+	function confirmar_eliminacion(id_amigo) {
+		if ( confirm( "¿Está seguro que desea eliminar al musico " + id_amigo + "?" ) ){
+			return true;
+		}
+		return false;
+	}
+
+	function confirmar_eliminacion_funcion(id_funcion) {
+		if ( confirm( "¿Está seguro que desea la función " + id_funcion + "?" ) ){
+			return true;
+		}
+		return false;
+	}
+
+
+</script>
+
+</head>
+
+
+<body>
+
+<div id="header-wrapper">
+	<div id="header">
+		<div id="logo">
+			<h1><a href="#">Salas Rosario</a></h1>
+		</div>
+		<div id="menu">
+			<ul>
+				<!-- TMPL_VAR lista_menu -->
+				<!-- <li class="current_page_item"><a href="escritorio.cgi"title="">Nuestros Amigos</a></li>
+				<li><a href="escritorio.cgi" title="">Funciones</a></li> -->
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<div id="footer-wrapper">
+	<div id="footer-content">
+		<div id="fbox1">
+			
+			<!-- <p>Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum. Integer nisl risus, sagittis:</p> -->
+			
+			<!-- TMPL_VAR TABLA_AMIGOS -->
+
+			<!--
+			<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%"> 
+				<thead> 
+					<tr>
+						<th>DNI</th> 
+						<th>Nombre</th> 
+						<th>Apellido</th> 
+						<th>Teléfono</th> 
+						<th>E-mail</th> 
+						<th>Acción</th> 
+					</tr> 
+				</thead> 
+				
+				<tbody> 
+					<tr id="r1" class="gradeX">
+		                <td>36485632</td>
+		                <td>Esteban</td>
+		                <td>González</td>
+		                <td>42135463</td>
+		                <td>esteban.gonzalez@hotmail.com</td>
+		                <td>
+		                	<p>
+		                		<a href="amigos_modificar.cgi"><img src="images/editar.png"  height="22px" width="22px"></a>
+		                		<a href="escritorio.cgi?accion=borrar&id="><img src="images/borrar.png"  height="22px" width="22px"></a>
+		                		<img onclick="javascript: return ver_descuentos([364,421],'r1');" 
+		                			 src="images/mostrar.png" height="22px" width="22px">
+		                	</p>
+		                </td>
+		            </tr>
+		            <tr id="r2" class="gradeX">
+		                <td>34856213</td>
+		                <td>Eduardo</td>
+		                <td>Vaiana</td>
+		                <td>4301652</td>
+		                <td>eduardo.vaiana@hotmail.com</td>
+		                <td><p onclick="javascript: return ver_descuentos([421,470],'r2');">Ver</p></td>
+		            </tr>
+		            <tr id="r3" class="gradeX">
+		                <td>27456123</td>
+		                <td>Andrés</td>
+		                <td>Valle</td>
+		                <td>4811693</td>
+		                <td>andres.valle@hotmail.com</td>
+		                <td><p href="" onclick="javascript: return ver_descuentos([364],'r3');">Ver</p></td>
+		            </tr>
+		            <tr id="r4" class="gradeX">
+		                <td>37412589</td>
+		                <td>Iván</td>
+		                <td>Fenoy</td>
+		                <td>4502312</td>
+		                <td>ivan.fenoy@hotmail.com</td>
+		                <td><p href="" onclick="javascript: return ver_descuentos([364,421,470],'r4');">Ver</p></td>
+		            </tr>
+				</tbody>
+				
+			</table>
+			-->
+
+
+			
+		</div>
+		<!-- <div id="fbox2">
+			<h2><span>Fusce ultrices</span> fringilla</h2>
+			<p>Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum. Integer nisl risus, sagittis convallis, rutrum id, elementum congue, nibh. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum elementum congue. Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Aliquam libero. Vivamus nisl nibh, iaculis vitae, viverra sit amet, ullamcorper vitae, turpis. Aliquam erat volutpat. Vestibulum dui sem, pulvinar sed, imperdiet nec, iaculis nec, leo.</p>
+			
+			<p class="button-style"><a href="#">More Details</a></p>
+
+
+		</div> -->
+	</div>
+</div>
+
+
+<!-- <div id="footer-wrapper">
+	<div id="footer-content">
+		<div id="fbox1">
+			<h2><span>Aenean elementum</span> facilisis</h2>
+			<p>Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum. Integer nisl risus, sagittis:</p>
+			<p>&nbsp;</p>
+			<ul class="style2">
+				<li class="first"><a href="#">Maecenas luctus lectus at sapien</a></li>
+				<li><a href="#">Donec dictum metus in sapien</a></li>
+				<li><a href="#">Integer gravida nibh quis urna</a></li>
+				<li><a href="#">Etiam posuere augue sit amet nisl</a></li>
+				<li><a href="#">Mauris vulputate dolor sit amet nibh</a></li>
+				<li><a href="#">Praesent scelerisque scelerisque erat</a></li>
+			</ul>
+			<p class="button-style"><a href="#">More Details</a></p>
+		</div>
+		<div id="fbox2">
+			<h2><span>Fusce ultrices</span> fringilla</h2>
+			<p><img src="images/img05.jpg" width="640" height="200" alt="" /></p>
+			<p>Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum. Integer nisl risus, sagittis convallis, rutrum id, elementum congue, nibh. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum elementum congue. Maecenas pede nisl, elementum eu, ornare ac, malesuada at, erat. Proin gravida orci porttitor enim accumsan lacinia. Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Aliquam libero. Vivamus nisl nibh, iaculis vitae, viverra sit amet, ullamcorper vitae, turpis. Aliquam erat volutpat. Vestibulum dui sem, pulvinar sed, imperdiet nec, iaculis nec, leo.</p>
+			<p class="button-style"><a href="#">More Details</a></p>
+		</div>
+	</div>
+</div> -->
+
+<div id="footer">
+	<p>Copyright(c) 2013 SalasRosario.com.ar Todos los derechos reservados. Diseñado por <a href="http://www.google.com.ar">Andr&eacute;s Valle</a>. Hosteado por <a href="http://www.educativa.com">E-ducativa</a></p>
+</div>
+
+</body>
+
+</html>
+

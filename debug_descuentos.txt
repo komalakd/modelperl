@@ -1,0 +1,999 @@
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-09',
+            '10',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = {
+          'id_amigo' => '1',
+          'fecha_pedido' => '<span>Asignar Descuento</span>',
+          'descuento' => '2013-01-30',
+          'descripcion' => '2013-01-09',
+          'id_funcion' => '...descripcion...',
+          'ultima_fecha' => '10',
+          'nombre' => 'Funcion 1'
+        };
+$VAR1 = {
+          'id_amigo' => '1',
+          'fecha_pedido' => '<span>Asignar Descuento</span>',
+          'descuento' => undef,
+          'descripcion' => '2013-01-31',
+          'id_funcion' => '...descripcion...',
+          'ultima_fecha' => '20',
+          'nombre' => 'Funcion 2'
+        };
+$VAR1 = {
+          'id_amigo' => '1',
+          'fecha_pedido' => '<span>Asignar Descuento</span>',
+          'descuento' => '2013-01-30',
+          'descripcion' => '2013-01-31',
+          'id_funcion' => 'dasfsad',
+          'ultima_fecha' => '33',
+          'nombre' => 'dsa'
+        };
+arreglo:
+$VAR1 = [
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => '<span>Asignar Descuento</span>',
+            'descuento' => '2013-01-30',
+            'descripcion' => '2013-01-31',
+            'id_funcion' => 'dasfsad',
+            'ultima_fecha' => '33',
+            'nombre' => 'dsa'
+          },
+          $VAR1->[0],
+          $VAR1->[0]
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-09',
+            '10',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = {
+          'id_amigo' => '1',
+          'fecha_pedido' => '<span>Asignar Descuento</span>',
+          'descuento' => '2013-01-30',
+          'descripcion' => '2013-01-09',
+          'id_funcion' => '...descripcion...',
+          'ultima_fecha' => '10',
+          'nombre' => 'Funcion 1'
+        };
+$VAR1 = {
+          'id_amigo' => '1',
+          'fecha_pedido' => '<span>Asignar Descuento</span>',
+          'descuento' => undef,
+          'descripcion' => '2013-01-31',
+          'id_funcion' => '...descripcion...',
+          'ultima_fecha' => '20',
+          'nombre' => 'Funcion 2'
+        };
+$VAR1 = {
+          'id_amigo' => '1',
+          'fecha_pedido' => '<span>Asignar Descuento</span>',
+          'descuento' => '2013-01-30',
+          'descripcion' => '2013-01-31',
+          'id_funcion' => 'dasfsad',
+          'ultima_fecha' => '33',
+          'nombre' => 'dsa'
+        };
+arreglo:
+$VAR1 = [
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => '<span>Asignar Descuento</span>',
+            'descuento' => '2013-01-30',
+            'descripcion' => '2013-01-31',
+            'id_funcion' => 'dasfsad',
+            'ultima_fecha' => '33',
+            'nombre' => 'dsa'
+          },
+          $VAR1->[0],
+          $VAR1->[0]
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-09',
+            '10',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          undef,
+          undef,
+          undef
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-09',
+            '10',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          undef,
+          undef,
+          undef
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-09',
+            '10',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => '<span>Asignar Descuento</span>',
+            'descuento' => '2013-01-30',
+            'descripcion' => '2013-01-09',
+            'id_funcion' => '...descripcion...',
+            'ultima_fecha' => '10',
+            'nombre' => 'Funcion 1'
+          },
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => '<span>Asignar Descuento</span>',
+            'descuento' => undef,
+            'descripcion' => '2013-01-31',
+            'id_funcion' => '...descripcion...',
+            'ultima_fecha' => '20',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => '<span>Asignar Descuento</span>',
+            'descuento' => '2013-01-30',
+            'descripcion' => '2013-01-31',
+            'id_funcion' => 'dasfsad',
+            'ultima_fecha' => '33',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-09',
+            '10',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => '2013-01-30',
+            'descuento' => '10',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '1',
+            'ultima_fecha' => '2013-01-09',
+            'nombre' => 'Funcion 1'
+          },
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => '<span>Asignar Descuento</span>',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => '2013-01-30',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-09',
+            '10',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=1&id_amigo=1">
+                        <!-- TMPL_VAR fecha_pedido -->
+                    </a>  
+                ',
+            'descuento' => '10',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '1',
+            'ultima_fecha' => '2013-01-09',
+            'nombre' => 'Funcion 1'
+          },
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => '<span>Asignar Descuento</span>',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'id_amigo' => '1',
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=4&id_amigo=1">
+                        <!-- TMPL_VAR fecha_pedido -->
+                    </a>  
+                ',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-09',
+            '10',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=1&id_amigo=1">
+                        <!-- TMPL_VAR fecha_pedido -->
+                    </a>  
+                ',
+            'descuento' => '10',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '1',
+            'ultima_fecha' => '2013-01-09',
+            'nombre' => 'Funcion 1'
+          },
+          {
+            'fecha_pedido' => '<span>Asignar Descuento</span>',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=4&id_amigo=1">
+                        <!-- TMPL_VAR fecha_pedido -->
+                    </a>  
+                ',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-09',
+            '10',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '10',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '1',
+            'ultima_fecha' => '2013-01-09',
+            'nombre' => 'Funcion 1'
+          },
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=2&id_amigo=1">
+                        <span>Asignar Descuento</span>
+                    </a>  
+                ',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            undef
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=2&id_amigo=">
+                        <span>Asignar Descuento</span>
+                    </a>  
+                ',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=4&id_amigo=">
+                        <span>Asignar Descuento</span>
+                    </a>  
+                ',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            undef
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=2&id_amigo=">
+                        <span>Asignar Descuento</span>
+                    </a>  
+                ',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=4&id_amigo=">
+                        <span>Asignar Descuento</span>
+                    </a>  
+                ',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-09',
+            '10',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            '2013-01-30'
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '10',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '1',
+            'ultima_fecha' => '2013-01-09',
+            'nombre' => 'Funcion 1'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            undef
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=2&id_amigo=4">
+                        <span>Asignar Descuento</span>
+                    </a>  
+                ',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=4&id_amigo=4">
+                        <span>Asignar Descuento</span>
+                    </a>  
+                ',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            undef
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=2&id_amigo=">
+                        <span>Asignar Descuento</span>
+                    </a>  
+                ',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=4&id_amigo=">
+                        <span>Asignar Descuento</span>
+                    </a>  
+                ',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            undef
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => ' <a href="descuentos.cgi?accion=asignar_descuento&id_funcion=2&id_amigo=2">
+                        <span>Asignar Descuento</span>
+                    </a>  
+                ',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            '2013-01-30'
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-30',
+            '103',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            '2013-01-30'
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '103',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '1',
+            'ultima_fecha' => '2013-01-30',
+            'nombre' => 'Funcion 1'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-30',
+            '103',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            '2013-01-30'
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '103',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '1',
+            'ultima_fecha' => '2013-01-30',
+            'nombre' => 'Funcion 1'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [];
+arreglo:
+$VAR1 = [];
+$VAR1 = [
+          [
+            '1',
+            'Funcion 1',
+            '...descripcion...',
+            '2013-01-30',
+            '103',
+            '2013-01-30'
+          ],
+          [
+            '2',
+            'Funcion 2',
+            '...descripcion...',
+            '2013-01-31',
+            '20',
+            '2013-01-30'
+          ],
+          [
+            '4',
+            'dsa',
+            'dasfsad',
+            '2013-01-31',
+            '33',
+            '2013-01-30'
+          ]
+        ];
+$VAR1 = undef;
+$VAR1 = undef;
+$VAR1 = undef;
+arreglo:
+$VAR1 = [
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '103',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '1',
+            'ultima_fecha' => '2013-01-30',
+            'nombre' => 'Funcion 1'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '20',
+            'descripcion' => '...descripcion...',
+            'id_funcion' => '2',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'Funcion 2'
+          },
+          {
+            'fecha_pedido' => 'DESCUENTO PEDIDO',
+            'descuento' => '33',
+            'descripcion' => 'dasfsad',
+            'id_funcion' => '4',
+            'ultima_fecha' => '2013-01-31',
+            'nombre' => 'dsa'
+          }
+        ];
+$VAR1 = [];
+arreglo:
+$VAR1 = [];
