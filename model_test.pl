@@ -147,3 +147,11 @@ sub testear_query_params {
 	);
 	print Dumper($params);
 }
+
+sub testear_getall {
+	my $params = Musico->GetAll(
+		where => { id_musico => [4,5], telefono_fijo => [43424252] },
+		page_number => 3,
+	);
+	print Dumper($params);
+}
