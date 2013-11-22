@@ -30,11 +30,11 @@ CREATE TABLE `musicos` (
   `apellido` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   `telefono_fijo` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono_celular` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `fecha_alta` date NOT NULL,
+  `fecha_alta` date DEFAULT NULL,
   `id_complejo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `musicoscol` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `dni` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id_musico`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-22 17:44:06
+-- Dump completed on 2013-11-22 18:23:13
