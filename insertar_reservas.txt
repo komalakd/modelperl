@@ -1,6 +1,0 @@
-localhost/SalasRosario/head/reservas.cgi?accion=confirma_alta&id_sala=24&id_musico=4&desde=25/02/2013 11:00&hasta=25/02/2013 12:00
-
-INSERT INTO reservas
-(id_sala,id_musico,id_banda,fecha_desde,fecha_hasta,fecha_reserva,tipo_reserva)
-VALUES
-(27,4,NULL,'2013-02-25 11:00:00','2013-02-25 12:00:00',NOW(),'N');
