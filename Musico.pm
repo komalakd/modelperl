@@ -72,17 +72,8 @@ sub GetOne {
 		limit => 1
 	);
 
-	my $row = $colection->[0];
-	my $musico = Musico->new(
-		id_musico 			=> $row->[0],
-    	dni 				=> $row->[1],
-    	nombre 				=> $row->[2],
-    	apellido 			=> $row->[3],
-    	telefono_fijo 		=> $row->[4],
-    	telefono_celular 	=> $row->[5],
-    	fecha_alta 			=> $row->[6],
-    	id_complejo			=> $row->[7],
-	);
+	my $musico = $colection->first;
+
 	$musico->set_state( 'SAVED' );
 	return $musico;
 }

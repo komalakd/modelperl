@@ -88,4 +88,9 @@ sub collect {
 	return $retorno;
 }
 
+sub first {
+	my $self = shift;
+	return $self->get_items->[0];
+}
+
 1;

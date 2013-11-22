@@ -160,15 +160,17 @@ sub insert {
 sub update {
 	my $self = shift;
 	my $table = $self->{table};
-	my %data = %{ $self->{data} };
-	my @fields = map { $_ } keys $self->{data};
+	my @fields = map { $_ } keys %{ $self->{data} };
 	my $fields = join ', ', map { "$_ = ?" } @fields;
 	my @bind_values = $self->get( @fields );
-	
+
 	$self->{dbh}->do(qq|
-	    UPDATE $table SET ($fields)
-	    VALUES ($placeholders)
-	|,undef, @bind_values );
+	    UPDATE $table 
+	    SET $fields
+	    WHERE $self->{id_denomination} = ?
+	|,undef, @bind_values, $self->get( $self->{id_denomination} ) );
+
+	$self->set_state( 'SAVED' );
 }
 
 # Borra en base un objeto particular
@@ -176,11 +178,12 @@ sub delete {
 	my $self = shift;
 	my $table = $self->{table};
 	my $id_denomination = $self->{id_denomination};
-	my $bind_value = $self->get( ($id_denomination) );
+	my $id = $self->get( ($id_denomination) );
 	
 	$self->{dbh}->do(qq|
-	    DELETE FROM $table WHERE $id_denomination = ?
-	|,undef, @bind_value );
+	    DELETE FROM $table 
+	    WHERE $id_denomination = ?
+	|,undef, $id );
 
 	$self->set_state( 'DELETED' );
 }
@@ -193,8 +196,11 @@ sub exists {
 	my $bind_value = $self->get( ($id_denomination) );
 	
 	return $self->{dbh}->selectall_arrayref(qq|
-	    SELECT COUNT(*) FROM $table WHERE $id_denomination = ? LIMIT 1
-	|,undef, @bind_value )->[0][0];
+	    SELECT COUNT(*) 
+	    FROM $table 
+	    WHERE $id_denomination = ? 
+	    LIMIT 1
+	|,undef, $bind_value )->[0][0];
 }
 
 # TODO

@@ -30,11 +30,11 @@ exit 0;
 sub run {
 	# testear_insert();
 	# testear_update();
-	# testear_delete();
+	testear_delete();
 	# testear_coleccion_nueva();
 	# testear_coleccion_existente();
 	# testear_ambas_colecciones();
-	testear_query_params();
+	# testear_query_params();
 }
 
 #! Funciones !#
@@ -55,10 +55,8 @@ sub testear_insert {
 }
 
 sub testear_update {
-	my $musico = Musico->GetOne(12);
-	print Dumper( $musico );
+	my $musico = Musico->GetOne(1);
 	$musico->set(nombre => 'Otro', apellido => 'Otro');
-	print Dumper( $musico );
 	$musico->save();
 
 	print $fh $/."testear_update: ".$/;
@@ -66,7 +64,7 @@ sub testear_update {
 }
 
 sub testear_delete {
-	my $musico = Musico->GetOne(dni=>34933298);
+	my $musico = Musico->GetOne(1);
 	$musico->delete();
 	$musico->save();
 
@@ -140,13 +138,13 @@ sub get_musicos_guardados {
 	return (\@musicos);
 }
 
-sub testear_query_params {
-	my $params = Model->QueryParams(
-		where => { id_musico => [4,5], caca => ['mucha','poca'] },
-		page_number => 2,
-	);
-	print Dumper($params);
-}
+# sub testear_query_params {
+# 	my $params = Model->QueryParams(
+# 		where => { id_musico => [4,5], caca => ['mucha','poca'] },
+# 		page_number => 2,
+# 	);
+# 	print Dumper($params);
+# }
 
 sub testear_getall {
 	my $params = Musico->GetAll(
