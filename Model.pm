@@ -287,4 +287,28 @@ sub Insert {
 
 }
 
+# Recibe una coleccion de objetos y los actualiza en base
+sub Update {
+	my $self = shift;
+	my $colection = shift;
+
+	my $fields = $self->fields();
+	my $fields_str = join ',', @$fields;
+	my $ph_str = join ',', map { ' '.$_.'= ?' } @$fields;
+
+	my $pk = shift @$fields;
+
+	my $sth = Database->new()->prepare(qq|
+	    UPDATE musicos SET $ph_str
+	    WHERE $pk = ?
+	|,undef);
+
+	foreach my $object ( @$colection ){
+		$sth->execute(
+			$self->get( $fields )
+		);
+		$self->set_state( 'SAVED' );
+	}
+}
+
 1;

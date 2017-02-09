@@ -29,6 +29,7 @@ sub new {
 sub table {
 	return 'musicos';
 }
+
 sub fields {
 	return [qw/
 		id_musico
@@ -40,26 +41,6 @@ sub fields {
 		fecha_alta
 		id_complejo
 	/];
-}
-
-
-
-# Recibe una coleccion de objetos y los actualiza en base
-sub Update {
-	my $self = shift;
-	my $colection = shift;
-
-	my $sth = Database->new()->prepare(qq|
-	    UPDATE musicos SET dni = ?, nombre = ?, apellido = ?, telefono_fijo = ?, telefono_celular = ?, id_complejo = ?
-	    WHERE id_musico = ?
-	|,undef);
-
-	foreach my $object ( @$colection ){
-		$sth->execute(
-			$self->get( qw/dni nombre apellido telefono_fijo telefono_celular id_musico id_complejo/ )
-		);
-		$self->set_state( 'SAVED' );
-	}
 }
 
 # Recibe una coleccion de objetos y los borra de la base
