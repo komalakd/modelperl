@@ -299,7 +299,7 @@ sub Update {
 	my $pk = shift @$fields;
 
 	my $sth = Database->new()->prepare(qq|
-	    UPDATE musicos SET $ph_str
+	    UPDATE $self->table SET $ph_str
 	    WHERE $pk = ?
 	|,undef);
 
@@ -310,5 +310,30 @@ sub Update {
 		$self->set_state( 'SAVED' );
 	}
 }
+
+# Recibe una coleccion de objetos y los borra de la base
+sub Delete {
+	my $self = shift;
+	my $colection = shift;
+	
+	return unless @$colection;
+
+	my $fields = $self->fields();
+	my $pk = shift @$fields;
+
+	my @ids = map { $_->get( $pk ) } @$colection;
+	my $placeholders = join ',', map { '?' } @ids;
+
+	# TODO - validar que existan todos los objetos ?
+	Database->new()->do(qq|
+	    DELETE FROM $self->table
+	    WHERE $pk = IN($placeholders)
+	|,undef,@ids);
+
+	map { $self->set_state( 'DELETED' ); } @$colection;
+
+	return $colection;
+}
+
 
 1;
