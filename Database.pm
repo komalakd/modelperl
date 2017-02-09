@@ -11,7 +11,7 @@ sub new {
 	my $hostname = "localhost";
 	my $port     = "3306";
 	my $username = "root";
-	my $password = "";
+	my $password = "root";
 
 	my $dsn = "DBI:$driver:database=$database;host=$hostname;port=$port";
 

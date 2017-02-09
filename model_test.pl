@@ -28,12 +28,13 @@ exit 0;
 # [ ] Traer listado de musicos
 
 sub run {
-	# testear_insert();
-	# testear_update();
-	testear_delete();
-	# testear_coleccion_nueva();
-	# testear_coleccion_existente();
-	# testear_ambas_colecciones();
+	my $id = testear_insert();
+	my $id2 = testear_insert();
+	testear_update($id);
+	testear_delete($id);
+	testear_coleccion_nueva();
+	testear_coleccion_existente($id2);
+	testear_ambas_colecciones($id2);
 	# testear_query_params();
 }
 
@@ -41,21 +42,24 @@ sub run {
 
 sub testear_insert {
 	my $musico = Musico->new( 
-		dni => 34933298,
-		nombre => 'nombre',
-		apellido => 'apellido',
-		telefono_fijo => '123',
+		dni              => 34933298,
+		nombre           => 'nombre',
+		apellido         => 'apellido',
+		telefono_fijo    => '123',
 		telefono_celular => '456',
-		id_complejo => 1,
+		id_complejo      => 1,
 	);
 	$musico->save();
-	
+	print Dumper $musico;
+	print Dumper $musico->get('id_musico');
+	return $musico->get('id_musico');
 	print $fh $/."testear_insert: ".$/;
 	print $fh Dumper( $musico );
 }
 
 sub testear_update {
-	my $musico = Musico->GetOne(1);
+	my $id = shift;
+	my $musico = Musico->GetOne($id);
 	$musico->set(nombre => 'Otro', apellido => 'Otro');
 	$musico->save();
 
@@ -64,7 +68,9 @@ sub testear_update {
 }
 
 sub testear_delete {
-	my $musico = Musico->GetOne(1);
+	my $id = shift;
+
+	my $musico = Musico->GetOne($id);
 	$musico->delete();
 	$musico->save();
 
@@ -73,25 +79,33 @@ sub testear_delete {
 }
 
 sub testear_coleccion_nueva {
-	my @musicos = get_musicos_nuevos();
-	Musico->Save(\@musicos);
+	my $musicos = get_musicos_nuevos();
+	print Dumper 'testear_coleccion_nueva';
+	print Dumper $musicos;
+
+
+	Musico->Save($musicos);
 
 	print $fh $/."testear_coleccion_nueva: ".$/;
-	print $fh Dumper( $_ ) foreach @musicos;
+	print $fh Dumper( $_ ) foreach @$musicos;
 }
 
 sub testear_coleccion_existente {
-	my @musicos = get_musicos_guardados();
-	Musico->Save(\@musicos);
+	my $id = shift;
+
+	my $musicos = get_musicos_guardados( $id );
+
+	Musico->Save($musicos);
 
 	print $fh $/."testear_coleccion_existente: ".$/;
-	print $fh Dumper( $_ ) foreach @musicos;
+	print $fh Dumper( $_ ) foreach @$musicos;
 }
 
 sub testear_ambas_colecciones {
-	my @musicos1 = get_musicos_nuevos();
-	my @musicos2 = get_musicos_guardados();
-	my @musicos = (@musicos1,@musicos2);
+	my $id = shift;
+	my $musicos1 = get_musicos_nuevos();
+	my $musicos2 = get_musicos_guardados($id);
+	my @musicos = (@$musicos1,@$musicos2);
 
 	Musico->Save(\@musicos);
 
@@ -106,6 +120,7 @@ sub get_musicos_nuevos {
 		apellido => 'apellido1',
 		telefono_fijo => '111',
 		telefono_celular => '111',
+		id_complejo => 1,
 	);
 	my $musico2 = Musico->new( 
 		dni => 22222222,
@@ -113,6 +128,7 @@ sub get_musicos_nuevos {
 		apellido => 'apellido2',
 		telefono_fijo => '222',
 		telefono_celular => '222',
+		id_complejo => 1,
 	);
 	my $musico3 = Musico->new( 
 		dni => 33333333,
@@ -120,6 +136,7 @@ sub get_musicos_nuevos {
 		apellido => 'apellido3',
 		telefono_fijo => '333',
 		telefono_celular => '333',
+		id_complejo => 1,
 	);
 
 	$musico2->set(dni => 99999999);
@@ -130,21 +147,20 @@ sub get_musicos_nuevos {
 }
 
 sub get_musicos_guardados {
-	my $musico1 = Musico->GetOne(dni => 44444444);
-	my $musico2 = Musico->GetOne(dni => 55555555);
-	my $musico3 = Musico->GetOne(dni => 66666666);
+	my $id = shift;
 
-	my @musicos = ($musico1,$musico2,$musico3);
-	return (\@musicos);
+	my $musico1 = Musico->GetOne($id);
+
+	return [ $musico1 ];
 }
 
-# sub testear_query_params {
-# 	my $params = Model->QueryParams(
-# 		where => { id_musico => [4,5], caca => ['mucha','poca'] },
-# 		page_number => 2,
-# 	);
-# 	print Dumper($params);
-# }
+sub testear_query_params {
+	my $params = Model->QueryParams(
+		where => { id_musico => [4,5], caca => ['mucha','poca'] },
+		page_number => 2,
+	);
+	print Dumper($params);
+}
 
 sub testear_getall {
 	my $params = Musico->GetAll(

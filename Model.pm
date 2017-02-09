@@ -65,6 +65,7 @@ sub GetAll {
 	
 	my $query = Query->new( @_ );
 	$query->prepare();
+	print Dumper $query;
 	return $query->execute();
 }
 
@@ -76,7 +77,7 @@ sub save {
 
 	my $state = $self->get_state();
 	if ( $state eq 'NEW'){
-		$self->insert();
+		return $self->insert();
 	} elsif ( $state eq 'MODIFIED' ) {
 		$self->update();
 	} elsif ( $state eq 'DELETED' ) {
@@ -93,40 +94,49 @@ sub save {
 # Separa los objetos dependiendo del atributo state
 # Se realiza insert, update y delete para los objetos de las distintas colecciones generadas
 sub Save {
-	my $self = shift;
+	my $class = shift;
 	my $colection = shift;
+print Dumper 'save';
+print Dumper $colection;
 
 	my @invalid = grep { $_->validate() } grep { $_->get_state() ne 'DELETED' } @$colection;
-
-	return {
-		error => 1,
-		invalid => \@invalid,
-	} if @invalid;
+	print Dumper 'Save';
+	print Dumper $colection;
+	# return {
+	# 	error => 1,
+	# 	invalid => \@invalid,
+	# } if @invalid;
 	
-	my $state_colection;
+	my $state_colection = {
+		to_insert => [],
+		to_update => [],
+		to_delete => [],
+	};
 	
 	foreach my $object ( @$colection ){
-		
+
 		my $state = $object->get_state();
 		if( $state eq 'NEW' ) {
 			push @{ $state_colection->{to_insert} }, $object;
 		}elsif ( $state eq 'MODIFIED' ){
 			push @{ $state_colection->{to_update} }, $object;
 		}elsif ( $state eq 'DELETED' ){
-			push @{ $state_colection->{to_delete} }, $object;
+			push @{ $state_colection->{to_delete} }, $object if $object->get('id_musico');
+		}elsif ( $state eq 'SAVED' ){
+			# relax
 		}else{
 			die "Unknown state: $state";
 		}
 	}
 
-	$self->Insert( $state_colection->{to_insert} );
-	$self->Update( $state_colection->{to_update} );
-	$self->Delete( $state_colection->{to_delete} );
+	$class->Insert( $state_colection->{to_insert} );
+	$class->Update( $state_colection->{to_update} );
+	$class->Delete( $state_colection->{to_delete} );
 
 	return {
 		inserted => $state_colection->{to_insert},
-		updated  => $state_colection->{to_insert},
-		deleted  => $state_colection->{to_insert},
+		updated  => $state_colection->{to_update},
+		deleted  => $state_colection->{to_delete},
 	};
 }
 
@@ -154,6 +164,10 @@ sub insert {
 	    INSERT INTO $table ($fields)
 	    VALUES ($placeholders)
 	|,undef, @bind_values );
+
+	my $id = $self->{dbh}->last_insert_id( undef, undef, undef, undef );
+
+	$self->set( 'id_musico' => $id );
 }
 
 # Actualiza en base un objeto particular

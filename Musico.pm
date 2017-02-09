@@ -65,14 +65,18 @@ sub GetAll {
 sub GetOne {
 	my $self = shift;
 	my $id_musico = shift;
+print Dumper $id_musico;	
 	my $colection = $self->GetAll(
 		where => {
 			id_musico => [$id_musico],
 		},
 		limit => 1
-	);
+	);	
 
+print Dumper $colection;
 	my $musico = $colection->first;
+
+	return undef unless $musico;
 
 	$musico->set_state( 'SAVED' );
 	return $musico;
@@ -82,18 +86,23 @@ sub GetOne {
 sub Insert {
 	my $self = shift;
 	my $colection = shift;
+print Dumper 'Insert';
+print Dumper $colection;	
+	# FIXME
+	my $sth = Database->new()->prepare(qq|
+	    INSERT INTO musicos (dni, nombre, apellido, telefono_fijo, telefono_celular, fecha_alta, id_complejo)
+	    VALUES (?,?,?,?,?,NOW(),?)
+	|);
+print Dumper( $self );
 
-	$self->{dbh}->prepare(qq|
-	    INSERT INTO musicos SET dni, nombre, apellido, telefono_fijo, telefono_celular, fecha_alta, id_complejo
-	    VALUES(?,?,?,?,?,NOW(),?)
-	|,undef);
 
 	foreach my $object ( @$colection ){
-		$self->{dbh}->execute(
-			$self->get( qw/dni nombre apellido telefono_fijo telefono_celular id_complejo/ )
+		$sth->execute(
+			$object->get( qw/dni nombre apellido telefono_fijo telefono_celular id_complejo/ )
 		);
-		$self->set_state( 'SAVED' );
+		$object->set_state( 'SAVED' );
 	}	
+
 }
 
 # Recibe una coleccion de objetos y los actualiza en base
@@ -101,13 +110,13 @@ sub Update {
 	my $self = shift;
 	my $colection = shift;
 
-	$self->{dbh}->prepare(qq|
+	my $sth = Database->new()->prepare(qq|
 	    UPDATE musicos SET dni = ?, nombre = ?, apellido = ?, telefono_fijo = ?, telefono_celular = ?, id_complejo = ?
 	    WHERE id_musico = ?
 	|,undef);
 
 	foreach my $object ( @$colection ){
-		$self->{dbh}->execute(
+		$sth->execute(
 			$self->get( qw/dni nombre apellido telefono_fijo telefono_celular id_musico id_complejo/ )
 		);
 		$self->set_state( 'SAVED' );
@@ -118,13 +127,16 @@ sub Update {
 sub Delete {
 	my $self = shift;
 	my $colection = shift;
-
-	my @ids = map { $_->get( qw/id/ ) } @$colection;
+return unless @$colection;
+	my @ids = map { $_->get( qw/id_musico/ ) } @$colection;
 	my $placeholders = join ',', map { '?' } @ids;
 
 	# TODO - validar que existan todos los objetos ?
+print Dumper $placeholders;
+print Dumper \@ids;
+print Dumper $colection;
 
-	$self->{dbh}->do(qq|
+	Database->new()->do(qq|
 	    DELETE FROM musicos
 	    WHERE id_musico = IN($placeholders)
 	|,undef,@ids);
