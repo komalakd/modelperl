@@ -92,6 +92,25 @@ sub GetAll {
 	return $colection;
 }
 
+sub GetOne {
+	my $class = shift;
+	my %args = @_;
+
+	my $colection = $class->GetAll(
+		where => {
+			%args
+		},
+		limit => 1
+	);	
+
+	my $object = $colection->first;
+
+	return undef unless $object;
+
+	$object->set_state( 'SAVED' );
+	return $object;
+}
+
 # Inserta, actualiza o borra el objeto en base
 sub save {
 	my $self = shift;

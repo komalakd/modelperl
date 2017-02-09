@@ -38,9 +38,10 @@ sub prepare {
 
 	# where
 	my @string_array;
+	print Dumper $self->{args};
 	my $where = $self->{args}{where};
 	foreach my $p ( keys %$where ){
-		my @values = @{  $where->{$p}  };
+		my @values = @{ $where->{$p}  };
 		my $placeholders = join ',', map { '?' } @values;
 		my $cond = "$p IN (" . join ',', $placeholders . ") ";
 		push @string_array, $cond;

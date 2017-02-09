@@ -58,7 +58,7 @@ sub testear_insert {
 
 sub testear_update {
 	my $id = shift;
-	my $musico = Musico->GetOne($id);
+	my $musico = Musico->GetOne(id_musico => [$id]);
 	$musico->set(nombre => 'Otro', apellido => 'Otro');
 	$musico->save();
 
@@ -69,7 +69,7 @@ sub testear_update {
 sub testear_delete {
 	my $id = shift;
 
-	my $musico = Musico->GetOne($id);
+	my $musico = Musico->GetOne(id_musico => [$id]);
 	$musico->delete();
 	$musico->save();
 
@@ -145,7 +145,7 @@ sub get_musicos_nuevos {
 sub get_musicos_guardados {
 	my $id = shift;
 
-	my $musico1 = Musico->GetOne($id);
+	my $musico1 = Musico->GetOne( id_musico => [$id]);
 
 	return [ $musico1 ];
 }

@@ -42,26 +42,6 @@ sub fields {
 	/];
 }
 
-
-sub GetOne {
-	my $class = shift;
-	my $id_musico = shift;
-
-	my $colection = $class->GetAll(
-		where => {
-			id_musico => [$id_musico],
-		},
-		limit => 1
-	);	
-
-	my $musico = $colection->first;
-
-	return undef unless $musico;
-
-	$musico->set_state( 'SAVED' );
-	return $musico;
-}
-
 # Recibe una coleccion de objetos y los inserta en base
 sub Insert {
 	my $self = shift;
