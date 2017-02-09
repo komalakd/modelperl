@@ -10,18 +10,15 @@ use Model;
 # Constructor
 sub new {
 	my $class = shift;
+    
+    my %data = map { $_ => undef } @{$class->fields()};
+
     my $self = {
     	id_denomination => 'id_musico',
     	table => 'musicos',
     	data => {
-	    	id_musico 			=> undef,
-	    	dni 				=> undef,
-	    	nombre 				=> undef,
-	    	apellido 			=> undef,
-	    	telefono_fijo 		=> undef,
-	    	telefono_celular 	=> undef,
-	    	fecha_alta 			=> undef,
-	    	id_complejo			=> undef,
+	    	%data,
+	    	@_
 	    }
     };
     bless $self, $class;
@@ -29,44 +26,28 @@ sub new {
     $self->SUPER::new(@_);
     return $self;
 }
-
-sub GetAll {
-	my $self = shift;
-
-	my $hash = $self->SUPER::GetAll(
-		fields => [qw/id_musico dni nombre apellido telefono_fijo telefono_celular fecha_alta id_complejo/],
-		from   => ' FROM musicos ',
-		@_
-	);
-
-	require Colection;
-	my $colection = Colection->new(
-		page_number => $hash->{page_number},
-		total_records => $hash->{total_records},
-	);
-
-	foreach my $row ( @{$hash->{result_set}} ) {
-		my $musico = Musico->new(
-			id_musico 			=> $row->[0],
-	    	dni 				=> $row->[1],
-	    	nombre 				=> $row->[2],
-	    	apellido 			=> $row->[3],
-	    	telefono_fijo 		=> $row->[4],
-	    	telefono_celular 	=> $row->[5],
-	    	fecha_alta 			=> $row->[6],
-	    	id_complejo			=> $row->[7],
-		);
-		$musico->set_state( 'SAVED' );
-		$colection->add($musico);
-	}
-
-	return $colection;	
+sub table {
+	return 'musicos';
 }
+sub fields {
+	return [qw/
+		id_musico
+		dni
+		nombre
+		apellido
+		telefono_fijo
+		telefono_celular
+		fecha_alta
+		id_complejo
+	/];
+}
+
+
 sub GetOne {
-	my $self = shift;
+	my $class = shift;
 	my $id_musico = shift;
 
-	my $colection = $self->GetAll(
+	my $colection = $class->GetAll(
 		where => {
 			id_musico => [$id_musico],
 		},
@@ -125,7 +106,7 @@ sub Delete {
 	my $colection = shift;
 	
 	return unless @$colection;
-	
+
 	my @ids = map { $_->get( qw/id_musico/ ) } @$colection;
 	my $placeholders = join ',', map { '?' } @ids;
 

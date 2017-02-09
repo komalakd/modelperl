@@ -63,10 +63,33 @@ sub GetAll {
 	
 	require Query;
 	
-	my $query = Query->new( @_ );
+	my $query = Query->new( 
+		from => ' FROM ' . $self->table(),
+		fields => $self->fields(),
+		@_ 
+	);
 	$query->prepare();
 
-	return $query->execute();
+	my $result = $query->execute();
+
+	require Colection;
+	my $colection = Colection->new(
+		page_number => $result->{page_number},
+		total_records => $result->{total_records},
+	);
+
+	foreach my $row ( @{$result->{result_set}} ) {
+		my %args = ();
+		foreach my $field ( @{ $self->fields() } ) {
+			$args{$field} = shift @$row;
+		}
+
+		my $musico = $self->new( %args );
+		$musico->set_state( 'SAVED' );
+		$colection->add($musico);
+	}
+
+	return $colection;
 }
 
 # Inserta, actualiza o borra el objeto en base
