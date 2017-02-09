@@ -65,7 +65,7 @@ sub GetAll {
 	
 	my $query = Query->new( @_ );
 	$query->prepare();
-	print Dumper $query;
+
 	return $query->execute();
 }
 
@@ -96,16 +96,13 @@ sub save {
 sub Save {
 	my $class = shift;
 	my $colection = shift;
-print Dumper 'save';
-print Dumper $colection;
 
 	my @invalid = grep { $_->validate() } grep { $_->get_state() ne 'DELETED' } @$colection;
-	print Dumper 'Save';
-	print Dumper $colection;
-	# return {
-	# 	error => 1,
-	# 	invalid => \@invalid,
-	# } if @invalid;
+
+	return {
+		error   => 1,
+		invalid => \@invalid,
+	} if @invalid;
 	
 	my $state_colection = {
 		to_insert => [],

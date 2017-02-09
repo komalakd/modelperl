@@ -65,7 +65,7 @@ sub GetAll {
 sub GetOne {
 	my $self = shift;
 	my $id_musico = shift;
-print Dumper $id_musico;	
+
 	my $colection = $self->GetAll(
 		where => {
 			id_musico => [$id_musico],
@@ -73,7 +73,6 @@ print Dumper $id_musico;
 		limit => 1
 	);	
 
-print Dumper $colection;
 	my $musico = $colection->first;
 
 	return undef unless $musico;
@@ -86,15 +85,12 @@ print Dumper $colection;
 sub Insert {
 	my $self = shift;
 	my $colection = shift;
-print Dumper 'Insert';
-print Dumper $colection;	
+
 	# FIXME
 	my $sth = Database->new()->prepare(qq|
 	    INSERT INTO musicos (dni, nombre, apellido, telefono_fijo, telefono_celular, fecha_alta, id_complejo)
 	    VALUES (?,?,?,?,?,NOW(),?)
 	|);
-print Dumper( $self );
-
 
 	foreach my $object ( @$colection ){
 		$sth->execute(
@@ -127,15 +123,13 @@ sub Update {
 sub Delete {
 	my $self = shift;
 	my $colection = shift;
-return unless @$colection;
+	
+	return unless @$colection;
+	
 	my @ids = map { $_->get( qw/id_musico/ ) } @$colection;
 	my $placeholders = join ',', map { '?' } @ids;
 
 	# TODO - validar que existan todos los objetos ?
-print Dumper $placeholders;
-print Dumper \@ids;
-print Dumper $colection;
-
 	Database->new()->do(qq|
 	    DELETE FROM musicos
 	    WHERE id_musico = IN($placeholders)

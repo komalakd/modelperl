@@ -50,8 +50,7 @@ sub testear_insert {
 		id_complejo      => 1,
 	);
 	$musico->save();
-	print Dumper $musico;
-	print Dumper $musico->get('id_musico');
+
 	return $musico->get('id_musico');
 	print $fh $/."testear_insert: ".$/;
 	print $fh Dumper( $musico );
@@ -80,9 +79,6 @@ sub testear_delete {
 
 sub testear_coleccion_nueva {
 	my $musicos = get_musicos_nuevos();
-	print Dumper 'testear_coleccion_nueva';
-	print Dumper $musicos;
-
 
 	Musico->Save($musicos);
 
