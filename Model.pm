@@ -264,4 +264,27 @@ sub validate {
 	return 1; # FIXME - retorna solo valido
 }
 
+# Recibe una coleccion de objetos y los inserta en base
+sub Insert {
+	my $self = shift;
+	my $colection = shift;
+
+	my $fields = $self->fields();
+	my $fields_str = join ',', @$fields;
+	my $ph_str = join ',', map { '?' } @$fields;
+
+	my $sth = Database->new()->prepare(qq|
+	    INSERT INTO $self->table ($fields_str)
+	    VALUES ($ph_str)
+	|);
+
+	foreach my $object ( @$colection ){
+		$sth->execute(
+			$object->get( $fields )
+		);
+		$object->set_state( 'SAVED' );
+	}	
+
+}
+
 1;

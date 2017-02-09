@@ -42,25 +42,7 @@ sub fields {
 	/];
 }
 
-# Recibe una coleccion de objetos y los inserta en base
-sub Insert {
-	my $self = shift;
-	my $colection = shift;
 
-	# FIXME
-	my $sth = Database->new()->prepare(qq|
-	    INSERT INTO musicos (dni, nombre, apellido, telefono_fijo, telefono_celular, fecha_alta, id_complejo)
-	    VALUES (?,?,?,?,?,NOW(),?)
-	|);
-
-	foreach my $object ( @$colection ){
-		$sth->execute(
-			$object->get( qw/dni nombre apellido telefono_fijo telefono_celular id_complejo/ )
-		);
-		$object->set_state( 'SAVED' );
-	}	
-
-}
 
 # Recibe una coleccion de objetos y los actualiza en base
 sub Update {
