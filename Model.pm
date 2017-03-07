@@ -160,7 +160,7 @@ sub Save {
 		}elsif ( $state eq 'MODIFIED' ){
 			push @{ $state_colection->{to_update} }, $object;
 		}elsif ( $state eq 'DELETED' ){
-			push @{ $state_colection->{to_delete} }, $object if $object->get('id_musico');
+			push @{ $state_colection->{to_delete} }, $object if $object->get( $object->pk() );
 		}elsif ( $state eq 'SAVED' ){
 			# relax
 		}else{
@@ -206,7 +206,7 @@ sub insert {
 
 	my $id = $self->{dbh}->last_insert_id( undef, undef, undef, undef );
 
-	$self->set( 'id_musico' => $id );
+	$self->set( $self->pk() => $id );
 }
 
 # Actualiza en base un objeto particular
