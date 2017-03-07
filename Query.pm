@@ -1,6 +1,5 @@
-#!C:\PERL\bin\perl.exe
-
 package Query;
+
 use strict;
 use Data::Dumper;
 use Database;

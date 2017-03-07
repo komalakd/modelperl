@@ -1,8 +1,7 @@
-#!C:\PERL\bin\perl.exe
+package Database;
+
 use strict;
 use DBI;
-
-package Database;
 
 sub new {
 	my $self = shift;

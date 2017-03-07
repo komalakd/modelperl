@@ -1,6 +1,5 @@
-#!C:\PERL\bin\perl.exe
-
 package Musico;
+
 use base 'Model'; 
 
 use strict;

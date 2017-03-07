@@ -1,6 +1,5 @@
-#!C:\PERL\bin\perl.exe
-
 package Colection;
+
 use strict;
 use Data::Dumper;
 

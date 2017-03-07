@@ -1,4 +1,4 @@
-#!C:\PERL\bin\perl.exe
+#!/usr/bin/perl
 
 use strict;
 use Data::Dumper;
