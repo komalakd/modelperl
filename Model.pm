@@ -64,9 +64,10 @@ sub GetAll {
 	require Query;
 	
 	my $query = Query->new( 
-		from => ' FROM ' . $self->table(),
+		pk     => $self->pk(),
+		from   => ' FROM ' . $self->table(),
 		fields => $self->fields(),
-		@_ 
+		@_ # FIXME: filter params
 	);
 	$query->prepare();
 
@@ -84,9 +85,9 @@ sub GetAll {
 			$args{$field} = shift @$row;
 		}
 
-		my $musico = $self->new( %args );
-		$musico->set_state( 'SAVED' );
-		$colection->add($musico);
+		my $instance = $self->new( %args );
+		$instance->set_state('SAVED');
+		$colection->add($instance);
 	}
 
 	return $colection;
@@ -335,5 +336,9 @@ sub Delete {
 	return $colection;
 }
 
+sub pk {
+	my $self = shift;
+	return shift @{$self->fields()};
+}
 
 1;
