@@ -3,8 +3,14 @@ package Database;
 use strict;
 use DBI;
 
-sub new {
+{
+my $instance;
+
+sub GetInstance {
 	my $self = shift;
+    
+    return $instance if $instance;
+
     my $driver   = "mysql";
 	my $database = "modelperl";
 	my $hostname = "localhost";
@@ -14,7 +20,9 @@ sub new {
 
 	my $dsn = "DBI:$driver:database=$database;host=$hostname;port=$port";
 
-	return DBI->connect($dsn, $username, $password) or die("Could not connect!");
-}
+	$instance = DBI->connect($dsn, $username, $password) or die("Could not connect!");
 
+	return $instance;
+}
+}
 1;

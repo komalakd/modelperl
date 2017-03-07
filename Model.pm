@@ -16,7 +16,7 @@ my $states = [qw/
 sub new {
 	my $self = shift;
 	
-	$self->{dbh} = Database->new();
+	$self->{dbh} = Database->GetInstance();
 	$self->set_state( 'NEW' );
 	$self->set( @_ );
 }
@@ -273,7 +273,7 @@ sub Insert {
 	my $fields_str = join ',', @$fields;
 	my $ph_str = join ',', map { '?' } @$fields;
 
-	my $sth = Database->new()->prepare(qq|
+	my $sth = Database->GetInstance()->prepare(qq|
 	    INSERT INTO $self->table ($fields_str)
 	    VALUES ($ph_str)
 	|);
@@ -298,7 +298,7 @@ sub Update {
 
 	my $pk = shift @$fields;
 
-	my $sth = Database->new()->prepare(qq|
+	my $sth = Database->GetInstance()->prepare(qq|
 	    UPDATE $self->table SET $ph_str
 	    WHERE $pk = ?
 	|,undef);
@@ -325,7 +325,7 @@ sub Delete {
 	my $placeholders = join ',', map { '?' } @ids;
 
 	# TODO - validar que existan todos los objetos ?
-	Database->new()->do(qq|
+	Database->GetInstance()->do(qq|
 	    DELETE FROM $self->table
 	    WHERE $pk = IN($placeholders)
 	|,undef,@ids);

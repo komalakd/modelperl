@@ -6,7 +6,7 @@ use Data::Dumper;
 use Database;
 use Musico;
 
-my $dbh = Database->new( );
+my $dbh = Database->GetInstance( );
 
 print $/."Comienza!".$/;
 open my $fh, '>', 'debug.txt';

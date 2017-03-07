@@ -14,7 +14,7 @@ sub new {
     };
     bless $self, $class;
     
-    $self->{dbh} = Database->new();
+    $self->{dbh} = Database->GetInstance();
 
     return $self;
 }
