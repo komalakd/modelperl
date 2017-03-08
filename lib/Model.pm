@@ -23,8 +23,8 @@ sub new {
 
     my $self = {
         id_denomination => $class->pk(),
-        table => $class->table(),
-        data  => { %data }
+        table           => $class->table(),
+        data            => { %data }
     };
     
     bless $self, $class;
@@ -42,9 +42,11 @@ sub get {
     my $self = shift;
     my @attrs = @_;
 
+    my %fields = map { $_ => 1 } @{$self->fields()};
+
     my @values;
     foreach my $att ( @attrs ){
-        if ( exists $self->{data}{$att} ){
+        if ( exists $fields{$att} ){
             push @values, $self->{data}{$att};
         }else{
             die "Non-existent attibute: $att";
