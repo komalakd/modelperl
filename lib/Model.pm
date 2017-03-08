@@ -15,16 +15,16 @@ my $states = [qw/
 # Setea los parametros en comun de todos los objetos del Model
 sub new {
     my $class = shift;
+    my %args = @_;
+
+    my %fields = map { $_ => 1 } @{$class->fields()};
     
-    my %data = map { $_ => undef } @{$class->fields()};
+    my %data = grep { exists $fields{$_} } keys %args;
 
     my $self = {
         id_denomination => $class->pk(),
         table => $class->table(),
-        data => {
-            %data,
-            @_ # FIXME - filter attributes
-        }
+        data  => { %data }
     };
     
     bless $self, $class;
@@ -60,9 +60,11 @@ sub set {
     my $args = {
         @_
     };
-    
+
+    my %fields = map { $_ => 1 } @{$self->fields()};
+
     foreach my $att ( keys %$args ){
-        if ( exists $self->{data}{$att} ){
+        if ( exists $fields{$att} ){
             $self->{data}{$att} = $args->{$att};
         }else{
             die "Non-existent attibute: $att";
