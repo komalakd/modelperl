@@ -40,8 +40,6 @@ sub get {
     my $self = shift;
     my @attrs = @_;
 
-    my %fields = map { $_ => 1 } @{$self->fields()};
-
     my @values;
     foreach my $att ( @attrs ){
         if ( $self->attr_exists($att) ){
@@ -60,8 +58,6 @@ sub set {
     my $args = {
         @_
     };
-
-    my %fields = map { $_ => 1 } @{$self->fields()};
 
     foreach my $att ( keys %$args ){
         if ( $self->attr_exists($att) ){
