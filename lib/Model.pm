@@ -41,11 +41,11 @@ sub get {
     my @attrs = @_;
 
     my @values;
-    foreach my $att ( @attrs ){
-        if ( $self->attr_exists($att) ){
-            push @values, $self->{data}{$att};
+    foreach my $attr ( @attrs ){
+        if ( $self->attr_exists($attr) ){
+            push @values, $self->{data}{$attr};
         }else{
-            die "Non-existent attibute: $att";
+            die "Non-existent attibute: $attr";
         }
     }
 
@@ -55,15 +55,13 @@ sub get {
 # Recibe un hash de la forma FIELD => VALUE para setear los atributos
 sub set {
     my $self = shift;
-    my $args = {
-        @_
-    };
+    my %args = @_;
 
-    foreach my $att ( keys %$args ){
-        if ( $self->attr_exists($att) ){
-            $self->{data}{$att} = $args->{$att};
+    foreach my $attr ( keys %args ){
+        if ( $self->attr_exists($attr) ){
+            $self->{data}{$attr} = $args{$attr};
         }else{
-            die "Non-existent attibute: $att";
+            die "Non-existent attibute: $attr";
         }
     }
     
@@ -80,6 +78,13 @@ sub set {
 
         return exists $fields{$attr};
     }
+}
+
+sub filter_attrs { # JIT
+    my $self = shift;
+    my @attrs = @_;
+
+    return grep { $self->attr_exists($_) } @attrs;
 }
 
 sub GetAll {
