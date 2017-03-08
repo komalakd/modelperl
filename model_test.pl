@@ -3,6 +3,9 @@
 use strict;
 use Data::Dumper;
 
+use lib './lib';
+use lib './lib/Model';
+
 use Database;
 use Musico;
 
@@ -41,7 +44,7 @@ sub run {
 #! Funciones !#
 
 sub testear_insert {
-	my $musico = Musico->new( 
+	my $musico = Model::Musico->new( 
 		dni              => 34933298,
 		nombre           => 'nombre',
 		apellido         => 'apellido',
@@ -58,7 +61,7 @@ sub testear_insert {
 
 sub testear_update {
 	my $id = shift;
-	my $musico = Musico->GetOne(id_musico => [$id]);
+	my $musico = Model::Musico->GetOne(id_musico => [$id]);
 	$musico->set(nombre => 'Otro', apellido => 'Otro');
 	$musico->save();
 
@@ -69,7 +72,7 @@ sub testear_update {
 sub testear_delete {
 	my $id = shift;
 
-	my $musico = Musico->GetOne(id_musico => [$id]);
+	my $musico = Model::Musico->GetOne(id_musico => [$id]);
 	$musico->delete();
 	$musico->save();
 
@@ -80,7 +83,7 @@ sub testear_delete {
 sub testear_coleccion_nueva {
 	my $musicos = get_musicos_nuevos();
 
-	Musico->Save($musicos);
+	Model::Musico->Save($musicos);
 
 	print $fh $/."testear_coleccion_nueva: ".$/;
 	print $fh Dumper( $_ ) foreach @$musicos;
@@ -91,7 +94,7 @@ sub testear_coleccion_existente {
 
 	my $musicos = get_musicos_guardados( $id );
 
-	Musico->Save($musicos);
+	Model::Musico->Save($musicos);
 
 	print $fh $/."testear_coleccion_existente: ".$/;
 	print $fh Dumper( $_ ) foreach @$musicos;
@@ -103,14 +106,14 @@ sub testear_ambas_colecciones {
 	my $musicos2 = get_musicos_guardados($id);
 	my @musicos = (@$musicos1,@$musicos2);
 
-	Musico->Save(\@musicos);
+	Model::Musico->Save(\@musicos);
 
 	print $fh $/."testear_ambas_colecciones: ".$/;
 	print $fh Dumper( $_ ) foreach @musicos;	
 }
 
 sub get_musicos_nuevos {
-	my $musico1 = Musico->new( 
+	my $musico1 = Model::Musico->new( 
 		dni => 11111111,
 		nombre => 'nombre1',
 		apellido => 'apellido1',
@@ -118,7 +121,7 @@ sub get_musicos_nuevos {
 		telefono_celular => '111',
 		id_complejo => 1,
 	);
-	my $musico2 = Musico->new( 
+	my $musico2 = Model::Musico->new( 
 		dni => 22222222,
 		nombre => 'nombre2',
 		apellido => 'apellido2',
@@ -126,7 +129,7 @@ sub get_musicos_nuevos {
 		telefono_celular => '222',
 		id_complejo => 1,
 	);
-	my $musico3 = Musico->new( 
+	my $musico3 = Model::Musico->new( 
 		dni => 33333333,
 		nombre => 'nombre3',
 		apellido => 'apellido3',
@@ -145,7 +148,7 @@ sub get_musicos_nuevos {
 sub get_musicos_guardados {
 	my $id = shift;
 
-	my $musico1 = Musico->GetOne( id_musico => [$id]);
+	my $musico1 = Model::Musico->GetOne( id_musico => [$id]);
 
 	return [ $musico1 ];
 }
@@ -159,7 +162,7 @@ sub testear_query_params {
 }
 
 sub testear_getall {
-	my $params = Musico->GetAll(
+	my $params = Model::Musico->GetAll(
 		where => { id_musico => [4,5], telefono_fijo => [43424252] },
 		page_number => 3,
 	);

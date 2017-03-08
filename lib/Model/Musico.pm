@@ -1,4 +1,4 @@
-package Musico;
+package Model::Musico;
 
 use base 'Model'; 
 
