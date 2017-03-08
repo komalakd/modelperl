@@ -17,9 +17,7 @@ sub new {
     my $class = shift;
     my %args = @_;
 
-    my %fields = map { $_ => 1 } @{$class->fields()};
-    
-    my %data = grep { exists $fields{$_} } keys %args;
+    my %data = grep { $class->attr_exists($_) } keys %args;
 
     my $self = {
         id_denomination => $class->pk(),
@@ -46,7 +44,7 @@ sub get {
 
     my @values;
     foreach my $att ( @attrs ){
-        if ( exists $fields{$att} ){
+        if ( $self->attr_exists($att) ){
             push @values, $self->{data}{$att};
         }else{
             die "Non-existent attibute: $att";
@@ -66,7 +64,7 @@ sub set {
     my %fields = map { $_ => 1 } @{$self->fields()};
 
     foreach my $att ( keys %$args ){
-        if ( exists $fields{$att} ){
+        if ( $self->attr_exists($att) ){
             $self->{data}{$att} = $args->{$att};
         }else{
             die "Non-existent attibute: $att";
@@ -74,6 +72,18 @@ sub set {
     }
     
     $self->set_state( 'MODIFIED' ) if $self->get_state() ne 'NEW';
+}
+
+{
+    my %fields;
+    sub attr_exists {
+        my $self = shift;
+        my $attr = shift;
+
+        my %fields = map { $_ => 1 } @{$self->fields()} unless scalar %fields;
+
+        return exists $fields{$attr};
+    }
 }
 
 sub GetAll {
