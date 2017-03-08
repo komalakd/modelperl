@@ -14,11 +14,26 @@ my $states = [qw/
 
 # Setea los parametros en comun de todos los objetos del Model
 sub new {
-	my $self = shift;
+	my $class = shift;
 	
+	my %data = map { $_ => undef } @{$class->fields()};
+
+    my $self = {
+    	id_denomination => $class->pk(),
+    	table => $class->table(),
+    	data => {
+	    	%data,
+	    	@_ # FIXME - filter attributes
+	    }
+    };
+    
+    bless $self, $class;
+
 	$self->{dbh} = Database->GetInstance();
 	$self->set_state( 'NEW' );
 	$self->set( @_ );
+
+	return $self;
 }
 
 # Recibe un arrayref con los atributos que quieren obetenerse
