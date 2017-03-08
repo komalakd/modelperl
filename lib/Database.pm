@@ -1,16 +1,13 @@
 package Database;
 
+use base Singleton;
+
 use strict;
 use DBI;
 
-{
-my $instance;
-
-sub GetInstance {
-    my $self = shift;
+sub new {
+    my $class = shift;
     
-    return $instance if $instance;
-
     my $driver   = "mysql";
     my $database = "modelperl";
     my $hostname = "localhost";
@@ -20,9 +17,7 @@ sub GetInstance {
 
     my $dsn = "DBI:$driver:database=$database;host=$hostname;port=$port";
 
-    $instance = DBI->connect($dsn, $username, $password) or die("Could not connect!");
+    return DBI->connect($dsn, $username, $password) or die("Could not connect!");
+}
 
-    return $instance;
-}
-}
 1;
