@@ -6,14 +6,14 @@ use Data::Dumper;
 # Setea los parametros en comun de todos los objetos del Model
 sub new {
     my $class = shift;
-    my $args = {
-        @_
-    };
+    my %args = @_;
+
     my $self = {
-        items => [],
-        page_number => $args->{page_number} || undef,
-        total_records => $args->{total_records} || undef,
+        items         => [],
+        page_number   => $args{page_number} || undef,
+        total_records => $args{total_records} || undef,
     };
+    
     bless $self, $class;
 
     return $self;
@@ -76,10 +76,10 @@ sub collect {
     my $items = $self->get_items();
 
     my $retorno;
-    foreach my $i ( @$items ){
+    foreach my $item ( @$items ){
         my $hash;
-        foreach my $f ( @$fields ){
-            $hash->{f} = $i->get( $f );
+        foreach my $field ( @$fields ){
+            $hash->{f} = $item->get( $field );
         }
         push @{$retorno}, $hash;
     }
