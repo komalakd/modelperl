@@ -30,7 +30,8 @@ sub prepare {
     $params->{select} = 'SELECT '. join ', ', map { $_ } @{ $self->{args}{fields} };
 
     # count
-    $params->{count} = "SELECT COUNT($self->{args}{pk})";
+    my $count_fields = join ',', @{ $self->{args}{pk} };
+    $params->{count} = "SELECT COUNT($count_fields)";
 
     # from
     $params->{from} = $self->{args}{from};
@@ -50,7 +51,7 @@ sub prepare {
     $params->{binds}{where} = \@bind_values;
     
     # order
-    my $order = $self->{args}{order} || $self->{args}{pk};
+    my $order = $self->{args}{order} || join ',', @{ $self->{args}{pk} };
     # my $order = $self->{args}{order} || $self->{id_denomination}; # FIXME - dejar esta linea!
     $params->{order} = ' ORDER BY ? ';
     $params->{binds}{order} = $order;

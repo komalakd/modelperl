@@ -9,9 +9,12 @@ sub table {
     return 'musicos';
 }
 
-sub fields {
-    return [qw/
-        id_musico
+sub pk_fields {
+    return qw/id_musico/;
+}
+
+sub non_pk_fields {
+    return qw/
         dni
         nombre
         apellido
@@ -19,7 +22,7 @@ sub fields {
         telefono_celular
         fecha_alta
         id_complejo
-    /];
+    /;
 }
 
 1;

@@ -20,18 +20,32 @@ sub new {
     my %data = grep { $class->attr_exists($_) } keys %args;
 
     my $self = {
-        id_denomination => $class->pk(),
-        table           => $class->table(),
-        data            => { %data }
+        table => $class->table(),
+        data  => { %data },
     };
     
     bless $self, $class;
 
     $self->{dbh} = Database->GetInstance();
-    $self->set_state( 'NEW' );
+    $self->_set_state( 'NEW' );
     $self->set( @_ );
 
     return $self;
+}
+
+sub pk_fields { die 'must implement this annoying method.' }
+
+sub non_pk_fields { die 'must implement this annoying method.' }
+
+sub fields {
+    my $class = shift;
+    
+    my @fields = (
+        $class->pk_fields(),
+        $class->non_pk_fields(),
+    );
+
+    return [@fields];
 }
 
 # Recibe un arrayref con los atributos que quieren obetenerse
@@ -41,6 +55,7 @@ sub get {
     my @attrs = @_;
 
     my @values;
+
     foreach my $attr ( @attrs ){
         if ( $self->attr_exists($attr) ){
             push @values, $self->{data}{$attr};
@@ -59,13 +74,20 @@ sub set {
 
     foreach my $attr ( keys %args ){
         if ( $self->attr_exists($attr) ){
-            $self->{data}{$attr} = $args{$attr};
+            $self->_set( $attr, $args{$attr} );
         }else{
             die "Non-existent attibute: $attr";
         }
     }
     
-    $self->set_state( 'MODIFIED' ) if $self->get_state() ne 'NEW';
+    $self->_set_state( 'MODIFIED' ) if $self->_get_state() ne 'NEW';
+}
+
+sub _set {
+    my $self = shift;
+    my $attr = shift;
+    my $value = shift;
+    $self->{data}{$attr} = $value;
 }
 
 {
@@ -93,11 +115,12 @@ sub GetAll {
     require Query;
     
     my $query = Query->new( 
-        pk     => $self->pk(),
+        pk     => [$self->pk_fields()],
         from   => ' FROM ' . $self->table(),
         fields => $self->fields(),
         @_ # FIXME: filter params
     );
+    
     $query->prepare();
 
     my $result = $query->execute();
@@ -115,7 +138,7 @@ sub GetAll {
         }
 
         my $instance = $self->new( %args );
-        $instance->set_state('SAVED');
+        $instance->_set_state('SAVED');
         $colection->add($instance);
     }
 
@@ -137,17 +160,28 @@ sub GetOne {
 
     return undef unless $object;
 
-    $object->set_state( 'SAVED' );
+    $object->_set_state( 'SAVED' );
     return $object;
 }
 
-# Inserta, actualiza o borra el objeto en base
 sub save {
+    my $self = shift;
+    $self->_before_save();
+    $self->_save();
+    $self->_after_save();
+}
+
+sub _before_save {}
+
+sub _after_save {}
+
+# Inserta, actualiza o borra el objeto en base
+sub _save {
     my $self = shift;
     
     die unless $self->validate();
 
-    my $state = $self->get_state();
+    my $state = $self->_get_state();
     if ( $state eq 'NEW'){
         return $self->insert();
     } elsif ( $state eq 'MODIFIED' ) {
@@ -159,7 +193,7 @@ sub save {
     } else {
         die "Non-existent object state: $state";
     }
-    $self->set_state( 'SAVED' );
+    $self->_set_state( 'SAVED' );
 }
 
 # Recibe una coleccion de objetos
@@ -169,7 +203,9 @@ sub Save {
     my $class = shift;
     my $colection = shift;
 
-    my @invalid = grep { $_->validate() } grep { $_->get_state() ne 'DELETED' } @$colection;
+    $_->_before_save foreach @$colection;
+
+    my @invalid = grep { $_->validate() } grep { $_->_get_state() ne 'DELETED' } @$colection;
 
     return {
         error   => 1,
@@ -184,13 +220,13 @@ sub Save {
     
     foreach my $object ( @$colection ){
 
-        my $state = $object->get_state();
+        my $state = $object->_get_state();
         if( $state eq 'NEW' ) {
             push @{ $state_colection->{to_insert} }, $object;
         }elsif ( $state eq 'MODIFIED' ){
             push @{ $state_colection->{to_update} }, $object;
         }elsif ( $state eq 'DELETED' ){
-            push @{ $state_colection->{to_delete} }, $object if $object->get( $object->pk() );
+            push @{ $state_colection->{to_delete} }, $object if scalar grep { $object->get( $_ ) } $object->pk_fields();
         }elsif ( $state eq 'SAVED' ){
             # relax
         }else{
@@ -209,12 +245,12 @@ sub Save {
     };
 }
 
-sub get_state {
+sub _get_state {
     my $self = shift; 
     return $self->{state};
 }
 
-sub set_state {
+sub _set_state {
     my $self = shift; 
     $self->{state} = shift;
 }
@@ -234,41 +270,53 @@ sub insert {
         VALUES ($placeholders)
     |,undef, @bind_values );
 
-    my $id = $self->{dbh}->last_insert_id( undef, undef, undef, undef );
-
-    $self->set( $self->pk() => $id );
+    # set the values foreach primary key
+    foreach my $pk ( $self->pk_fields() ) {
+        my $pk_last_id = $self->{dbh}->last_insert_id( undef, undef, undef, $pk );
+        $self->set( $pk => $pk_last_id );
+    }
 }
 
 # Actualiza en base un objeto particular
 sub update {
     my $self = shift;
     my $table = $self->{table};
+    
+    # non-primary fields
     my @fields = map { $_ } keys %{ $self->{data} };
     my $fields = join ', ', map { "$_ = ?" } @fields;
     my @bind_values = $self->get( @fields );
 
+    # primary keys
+    my @pks = $self->pk_fields();
+    my $where = join ' AND ', map { "$_ = ?" } @pks;
+    push @bind_values, $self->get( @pks );
+
     $self->{dbh}->do(qq|
         UPDATE $table 
         SET $fields
-        WHERE $self->{id_denomination} = ?
-    |,undef, @bind_values, $self->get( $self->{id_denomination} ) );
+        WHERE $where
+    |,undef, @bind_values );
 
-    $self->set_state( 'SAVED' );
+    $self->_set_state( 'SAVED' );
 }
 
 # Borra en base un objeto particular
 sub delete {
     my $self = shift;
     my $table = $self->{table};
-    my $id_denomination = $self->{id_denomination};
-    my $id = $self->get( ($id_denomination) );
+
+    # primary keys
+    my @pks = $self->pk_fields();
+    my $where = join ' AND ', map { "$_ = ?" } @pks;
+    my @bind_values = $self->get( @pks );
     
     $self->{dbh}->do(qq|
         DELETE FROM $table 
-        WHERE $id_denomination = ?
-    |,undef, $id );
+        WHERE $where
+    |,undef, @bind_values );
 
-    $self->set_state( 'DELETED' );
+    $self->_set_state( 'DELETED' );
 }
 
 # Retorna si un objeto particular existe en base.
@@ -290,7 +338,7 @@ sub exists {
 # Verifica que los atributos de un objeto sean consistentes
 sub validate {
     my $self = shift;
-    return 1 if $self->get_state() eq 'DELETED';
+    return 1 if $self->_get_state() eq 'DELETED';
     return 1; # FIXME - retorna solo valido
 }
 
@@ -312,7 +360,9 @@ sub Insert {
         $sth->execute(
             $object->get( $fields )
         );
-        $object->set_state( 'SAVED' );
+        $object->_set_state( 'SAVED' );
+    
+        $object->_after_save();
     }   
 
 }
@@ -322,22 +372,22 @@ sub Update {
     my $self = shift;
     my $colection = shift;
 
-    my $fields = $self->fields();
-    my $fields_str = join ',', @$fields;
+    my $fields = $self->non_pk_fields();
     my $ph_str = join ',', map { ' '.$_.'= ?' } @$fields;
 
-    my $pk = shift @$fields;
+    # primary keys
+    my @pks = $self->pk_fields();
+    my $where = join ' AND ', map { "$_ = ?" } @pks;
 
     my $sth = Database->GetInstance()->prepare(qq|
         UPDATE $self->table SET $ph_str
-        WHERE $pk = ?
+        WHERE $where
     |,undef);
 
     foreach my $object ( @$colection ){
-        $sth->execute(
-            $self->get( $fields )
-        );
-        $self->set_state( 'SAVED' );
+        $sth->execute( $self->get( $fields ) );
+        $self->_set_state( 'SAVED' );
+        $object->_after_save();
     }
 }
 
@@ -346,28 +396,30 @@ sub Delete {
     my $self = shift;
     my $colection = shift;
     
-    return unless @$colection;
+    return unless @$colection; # FIXME: use get_size()
 
-    my $fields = $self->fields();
-    my $pk = shift @$fields;
+    my @item_conditions = ();
+    my @bind_values = ();
 
-    my @ids = map { $_->get( $pk ) } @$colection;
-    my $placeholders = join ',', map { '?' } @ids;
+    foreach my $item (@$colection) {
+        push @item_conditions, join( ' AND ', map { "$_ = ?" } $self->pk_fields() );
+        push @bind_values, $item->get( $item->pk_fields() );
+    }
+
+    my $where = join( ' OR ', map { '$_' } @item_conditions );
 
     # TODO - validar que existan todos los objetos ?
     Database->GetInstance()->do(qq|
         DELETE FROM $self->table
-        WHERE $pk = IN($placeholders)
-    |,undef,@ids);
+        WHERE $where
+    |,undef,@bind_values);
 
-    map { $self->set_state( 'DELETED' ); } @$colection;
+    foreach my $item ( @$colection ){
+        $item->_set_state( 'DELETED' );
+        $item->_after_save();
+    }
 
     return $colection;
-}
-
-sub pk {
-    my $self = shift;
-    return shift @{$self->fields()};
 }
 
 1;
