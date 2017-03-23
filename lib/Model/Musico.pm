@@ -5,6 +5,10 @@ use base 'Model';
 use strict;
 use Data::Dumper;
 
+sub classname {
+    return 'Model::Musico';
+}
+
 sub table {
     return 'musicos';
 }
@@ -23,6 +27,16 @@ sub non_pk_fields {
         fecha_alta
         id_complejo
     /;
+}
+
+sub relations {
+    return {
+        'pets' => {
+            type   => 'has_many',
+            model  => 'Model::Pet',
+            trough => 'id_musico',
+        }
+    }
 }
 
 1;

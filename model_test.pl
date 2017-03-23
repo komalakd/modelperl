@@ -8,6 +8,7 @@ use lib './lib/Model';
 
 use Database;
 use Musico;
+use Pet;
 
 my $dbh = Database->GetInstance( );
 
@@ -31,13 +32,14 @@ exit 0;
 # [ ] Traer listado de musicos
 
 sub run {
-    my $id = testear_insert();
-    my $id2 = testear_insert();
-    testear_update($id);
-    testear_delete($id);
-    testear_coleccion_nueva();
-    testear_coleccion_existente($id2);
-    testear_ambas_colecciones($id2);
+    # my $id = testear_insert();
+    # my $id2 = testear_insert();
+    # testear_update($id);
+    # testear_delete($id);
+    # testear_coleccion_nueva();
+    # testear_coleccion_existente($id2);
+    # testear_ambas_colecciones($id2);
+    testear_relaciones();
     # testear_query_params();
 }
 
@@ -167,4 +169,33 @@ sub testear_getall {
         page_number => 3,
     );
     print Dumper($params);
+}
+
+sub testear_relaciones {
+    my $musico = Model::Musico->new( 
+        dni              => 34933298,
+        nombre           => 'nombre',
+        apellido         => 'apellido',
+        telefono_fijo    => '123',
+        telefono_celular => '456',
+        id_complejo      => 1,
+    );
+    $musico->save();
+
+    my $id_musico =  $musico->get('id_musico');
+
+    my $mascota = Model::Pet->new( 
+        nombre    => 'rocko',
+        apodo     => 'coquito',
+        raza      => 'beagle',
+        id_musico => $id_musico,
+    );
+    $mascota->save();
+
+    my $id_mascota =  $mascota->get('id_mascota');
+    
+    print $fh $/."testear_relaciones: ".$/;
+    print $fh Dumper( $musico->get_related( 'pets' ) );
+    # print $fh Dumper( $mascota->get_related( 'owner' ) );   
+
 }

@@ -13,7 +13,8 @@ sub new {
         },
     };
     bless $self, $class;
-    
+    print '**************************************************** Query new' . "\n";
+    print Dumper({ self => $self });
     $self->{dbh} = Database->GetInstance();
 
     return $self;
@@ -22,6 +23,7 @@ sub new {
 
 sub prepare {
     my $self = shift;
+    print '**************************************************** Query prepare' . "\n";
 
     my $params;
     my @bind_values;
@@ -38,8 +40,10 @@ sub prepare {
 
     # where
     my @string_array;
-    print Dumper $self->{args};
+    print Dumper ({ query_args => $self->{args} });
     my $where = $self->{args}{where};
+    print Dumper({ where => $where });
+
     foreach my $p ( keys %$where ){
         my @values = @{ $where->{$p}  };
         my $placeholders = join ',', map { '?' } @values;
@@ -101,7 +105,7 @@ sub execute {
     my $self = shift;
 
     my $query_params = $self->{params};
-    
+
     $self->{result_set} = $self->{dbh}->selectall_arrayref(qq|
         $query_params->{select}
         $query_params->{from}

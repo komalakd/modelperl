@@ -91,12 +91,16 @@ sub _set {
 }
 
 {
-    my %fields;
+    my %cache = ();
     sub attr_exists {
         my $self = shift;
         my $attr = shift;
 
-        my %fields = map { $_ => 1 } @{$self->fields()} unless scalar %fields;
+        return map { $_ => 1 } @{$self->fields()}; # FIXME: cache isnt working
+
+        my %fields = map { $_ => 1 } @{$self->fields()} unless scalar keys $cache{ $self->classname() };
+
+        $cache{ $self->{classname} } = %fields;
 
         return exists $fields{$attr};
     }
@@ -111,14 +115,16 @@ sub filter_attrs { # JIT
 
 sub GetAll {
     my $self = shift;
-    
+    my %args = @_;
+    print '**************************************************** GetAll' . "\n";
+    print Dumper({ args => \%args });
     require Query;
     
     my $query = Query->new( 
         pk     => [$self->pk_fields()],
         from   => ' FROM ' . $self->table(),
         fields => $self->fields(),
-        @_ # FIXME: filter params
+        where  => { %args }, # FIXME: filter params
     );
     
     $query->prepare();
@@ -148,7 +154,7 @@ sub GetAll {
 sub GetOne {
     my $class = shift;
     my %args = @_;
-
+print '**************************************************** GetOne' . "\n";
     my $colection = $class->GetAll(
         where => {
             %args
@@ -264,7 +270,8 @@ sub insert {
     my $fields = join ', ', @fields;
     my $placeholders = join ',', map { '?' } @fields;
     my @bind_values = $self->get( @fields );
-    
+    # print Dumper({ query => "INSERT INTO $table ($fields) VALUES ($placeholders)" });
+    # print Dumper({ binds => \@bind_values });
     $self->{dbh}->do(qq|
         INSERT INTO $table ($fields)
         VALUES ($placeholders)
@@ -420,6 +427,41 @@ sub Delete {
     }
 
     return $colection;
+}
+
+sub get_related {
+    my $self = shift;
+    my $rel_name = shift;
+print '-------------------------------------- get_related' . "\n";
+print Dumper({ rel_name => $rel_name });
+    my $rel = $self->relations( $rel_name );
+print Dumper({ rel => $rel });
+
+    die "Non-existent relation: $rel" unless $rel;
+
+    my $rel_type = $rel->{$rel_name}{type};
+    my $rel_model_name = $rel->{$rel_name}{model};
+    my $rel_field = $rel->{$rel_name}{trough};
+    my $rel_field_value = $self->get( $rel_field );
+print Dumper({ rel_type => $rel_type });
+print Dumper({ rel_model_name => $rel_model_name });
+print Dumper({ rel_field => $rel_field });
+print Dumper({ rel_field_value => $rel_field_value });
+    die "Non-existent relation type: $rel_type" unless $rel;
+
+    my $relation;
+
+
+    if( $rel_type eq 'belongs_to'){
+        $relation = $rel_model_name->GetOne( $rel_field => [$self->get( $rel_field )] );
+    }elsif( $rel_type eq 'has_many'){
+        $relation = $rel_model_name->GetAll( $rel_field => [$self->get( $rel_field )] );
+    }elsif( $rel_type eq 'has_one'){ # TODO
+        $relation = $rel_model_name->GetOne( $rel_field => [$self->get( $rel_field )] );
+    }
+print Dumper({ relation => $relation });
+
+    return $relation;
 }
 
 1;
