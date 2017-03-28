@@ -13,17 +13,14 @@ sub new {
         },
     };
     bless $self, $class;
-    print '**************************************************** Query new' . "\n";
-    print Dumper({ self => $self });
+
     $self->{dbh} = Database->GetInstance();
 
     return $self;
 }
 
-
 sub prepare {
     my $self = shift;
-    print '**************************************************** Query prepare' . "\n";
 
     my $params;
     my @bind_values;
@@ -56,7 +53,7 @@ sub prepare {
     
     # order
     my $order = $self->{args}{order} || join ',', @{ $self->{args}{pk} };
-    # my $order = $self->{args}{order} || $self->{id_denomination}; # FIXME - dejar esta linea!
+
     $params->{order} = ' ORDER BY ? ';
     $params->{binds}{order} = $order;
 
@@ -123,6 +120,5 @@ sub execute {
 
     return $retorno;
 }
-
 
 1;

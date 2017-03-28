@@ -96,7 +96,7 @@ sub _set {
         my $self = shift;
         my $attr = shift;
 
-        return map { $_ => 1 } @{$self->fields()}; # FIXME: cache isnt working
+        return map { $_ => 1 } @{$self->fields()}; # FIXME: cache isn't working
 
         my %fields = map { $_ => 1 } @{$self->fields()} unless scalar keys $cache{ $self->classname() };
 
@@ -106,7 +106,7 @@ sub _set {
     }
 }
 
-sub filter_attrs { # JIT
+sub filter_attrs { # just in case...
     my $self = shift;
     my @attrs = @_;
 
@@ -116,8 +116,7 @@ sub filter_attrs { # JIT
 sub GetAll {
     my $self = shift;
     my %args = @_;
-    print '**************************************************** GetAll' . "\n";
-    print Dumper({ args => \%args });
+
     require Query;
     
     my $query = Query->new( 
@@ -133,7 +132,7 @@ sub GetAll {
 
     require Colection;
     my $colection = Colection->new(
-        page_number => $result->{page_number},
+        page_number   => $result->{page_number},
         total_records => $result->{total_records},
     );
 
@@ -154,7 +153,7 @@ sub GetAll {
 sub GetOne {
     my $class = shift;
     my %args = @_;
-print '**************************************************** GetOne' . "\n";
+
     my $colection = $class->GetAll(
         where => {
             %args
@@ -270,8 +269,7 @@ sub insert {
     my $fields = join ', ', @fields;
     my $placeholders = join ',', map { '?' } @fields;
     my @bind_values = $self->get( @fields );
-    # print Dumper({ query => "INSERT INTO $table ($fields) VALUES ($placeholders)" });
-    # print Dumper({ binds => \@bind_values });
+
     $self->{dbh}->do(qq|
         INSERT INTO $table ($fields)
         VALUES ($placeholders)
@@ -324,21 +322,6 @@ sub delete {
     |,undef, @bind_values );
 
     $self->_set_state( 'DELETED' );
-}
-
-# Retorna si un objeto particular existe en base.
-sub exists {
-    my $self = shift;
-    my $table = $self->{table};
-    my $id_denomination = $self->{id_denomination};
-    my $bind_value = $self->get( ($id_denomination) );
-    
-    return $self->{dbh}->selectall_arrayref(qq|
-        SELECT COUNT(*) 
-        FROM $table 
-        WHERE $id_denomination = ? 
-        LIMIT 1
-    |,undef, $bind_value )->[0][0];
 }
 
 # TODO
@@ -403,7 +386,7 @@ sub Delete {
     my $self = shift;
     my $colection = shift;
     
-    return unless @$colection; # FIXME: use get_size()
+    return unless $colection->get_total_records();
 
     my @item_conditions = ();
     my @bind_values = ();
@@ -432,10 +415,8 @@ sub Delete {
 sub get_related {
     my $self = shift;
     my $rel_name = shift;
-print '-------------------------------------- get_related' . "\n";
-print Dumper({ rel_name => $rel_name });
+
     my $rel = $self->relations( $rel_name );
-print Dumper({ rel => $rel });
 
     die "Non-existent relation: $rel" unless $rel;
 
@@ -443,14 +424,10 @@ print Dumper({ rel => $rel });
     my $rel_model_name = $rel->{$rel_name}{model};
     my $rel_field = $rel->{$rel_name}{trough};
     my $rel_field_value = $self->get( $rel_field );
-print Dumper({ rel_type => $rel_type });
-print Dumper({ rel_model_name => $rel_model_name });
-print Dumper({ rel_field => $rel_field });
-print Dumper({ rel_field_value => $rel_field_value });
+
     die "Non-existent relation type: $rel_type" unless $rel;
 
     my $relation;
-
 
     if( $rel_type eq 'belongs_to'){
         $relation = $rel_model_name->GetOne( $rel_field => [$self->get( $rel_field )] );
@@ -459,7 +436,6 @@ print Dumper({ rel_field_value => $rel_field_value });
     }elsif( $rel_type eq 'has_one'){ # TODO
         $relation = $rel_model_name->GetOne( $rel_field => [$self->get( $rel_field )] );
     }
-print Dumper({ relation => $relation });
 
     return $relation;
 }
